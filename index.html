@@ -2,325 +2,363 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Subtletang</title>
   <meta name="description" content="Subtletang — official site." />
 
+  <!-- Font (clean, italic wordmark vibe) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,500;0,700;1,600;1,700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
   <style>
     :root{
-      --bg: #0b0c0f;
-      --bg2:#090a0d;
-      --panel: rgba(255,255,255,0.03);
-      --panel2: rgba(255,255,255,0.02);
-      --text: rgba(255,255,255,0.88);
-      --muted: rgba(255,255,255,0.62);
-      --cream: #f2e6c9;
-      --cream2: rgba(242,230,201,0.70);
-      --border: rgba(242,230,201,0.16);
-      --border2: rgba(255,255,255,0.10);
-      --shadow: 0 12px 36px rgba(0,0,0,0.45);
-      --radius: 18px;
-      --radius2: 14px;
-      --max: 1120px;
+      /* core */
+      --black-1:#07080a;
+      --black-2:#0b0c0f;
+      --cream:#f2e6c9;
+      --cream-2:rgba(242,230,201,0.72);
+      --ink:rgba(255,255,255,0.88);
+      --muted:rgba(255,255,255,0.60);
+
+      /* surfaces */
+      --glass:rgba(255,255,255,0.045);
+      --glass-2:rgba(255,255,255,0.028);
+      --border:rgba(242,230,201,0.16);
+
+      /* sizing */
+      --max:1120px;
+      --radius:18px;
+      --radius2:14px;
+
+      /* fonts */
+      --ui:"Inter", ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      --wordmark:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
     }
 
-    * { box-sizing: border-box; }
-    html, body { height: 100%; }
-    body {
-      margin: 0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background:
-        radial-gradient(1100px 700px at 12% 10%, rgba(242,230,201,0.09), transparent 60%),
-        radial-gradient(900px 650px at 82% 22%, rgba(242,230,201,0.06), transparent 55%),
-        linear-gradient(180deg, var(--bg), var(--bg2));
-      color: var(--text);
-      letter-spacing: 0.15px;
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family:var(--ui);
+      color:var(--ink);
+
+      /* requested: cream bottom -> black top */
+      background: linear-gradient(
+        to top,
+        var(--cream) 0%,
+        var(--black-2) 62%,
+        var(--black-1) 100%
+      );
+
+      /* subtle noise/contrast without obvious gradients */
+      background-attachment: fixed;
     }
 
-    a { color: inherit; text-decoration: none; }
-    a:hover { color: var(--cream); }
+    a{ color:inherit; text-decoration:none; }
+    a:focus-visible, button:focus-visible{
+      outline:2px solid rgba(242,230,201,0.55);
+      outline-offset:3px;
+      border-radius:10px;
+    }
 
-    .wrap { max-width: var(--max); margin: 0 auto; padding: 26px 22px 80px; }
+    .wrap{
+      max-width:var(--max);
+      margin:0 auto;
+      padding:28px 22px 60px;
+    }
 
-    /* top bar */
-    header{
-      display:flex; align-items:center; justify-content:space-between;
-      gap: 14px;
-      position: sticky; top: 0;
-      padding: 16px 0;
-      backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(11,12,15,0.78), rgba(11,12,15,0));
-      z-index: 10;
+    /* Top bar */
+    .topbar{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      padding:10px 0 22px;
     }
 
     .brand{
-      display:flex; align-items:center; gap: 12px;
-      min-width: 190px;
+      display:flex;
+      align-items:center;
+      gap:12px;
+      min-width: 180px;
     }
 
-    .mark{
-      width: 34px; height: 34px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: radial-gradient(circle at 35% 30%, rgba(242,230,201,0.35), rgba(242,230,201,0.06) 55%, transparent 72%);
-      box-shadow: var(--shadow);
+    .orb{
+      width:18px;
+      height:18px;
+      border-radius:999px;
+      background: radial-gradient(circle at 30% 30%, rgba(242,230,201,0.8), rgba(242,230,201,0.25) 38%, rgba(0,0,0,0) 60%),
+                  rgba(255,255,255,0.06);
+      border:1px solid rgba(242,230,201,0.22);
+      box-shadow: 0 0 0 6px rgba(242,230,201,0.045);
     }
 
-    .brand b{
-      font-weight: 650;
-      letter-spacing: 0.6px;
+    .brand-name{
+      font-family:var(--wordmark);
+      font-style:italic;
+      font-weight:700;
+      letter-spacing:0.02em;
+      font-size:15px;
+      color:rgba(255,255,255,0.85);
     }
 
-    nav{
-      display:flex; align-items:center; gap: 10px;
-      flex-wrap: wrap;
-      justify-content: flex-end;
+    .nav{
+      display:flex;
+      align-items:center;
+      gap:18px;
+      font-size:13px;
+      color:rgba(255,255,255,0.72);
+      white-space:nowrap;
     }
 
-    .pill{
-      padding: 9px 12px;
-      border-radius: 999px;
-      border: 1px solid transparent;
-      color: var(--muted);
-      font-size: 13px;
-      line-height: 1;
+    .nav a{
+      padding:8px 10px;
+      border-radius:999px;
+      transition: background 160ms ease, color 160ms ease, border-color 160ms ease;
     }
-    .pill:hover{ border-color: var(--border); color: var(--cream); }
 
-    .cta{
-      padding: 9px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
+    .nav a:hover{
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.90);
+    }
+
+    .nav .cta{
+      border:1px solid rgba(242,230,201,0.22);
       background: rgba(242,230,201,0.06);
-      color: var(--cream);
-      font-size: 13px;
-      line-height: 1;
+      color: rgba(242,230,201,0.95);
     }
-    .cta:hover{ background: rgba(242,230,201,0.10); }
 
-    /* hero */
+    .nav .cta:hover{
+      background: rgba(242,230,201,0.10);
+      border-color: rgba(242,230,201,0.34);
+    }
+
+    /* Hero */
     .hero{
-      margin-top: 24px;
-      padding: 46px 26px;
+      margin-top: 18px;
+      display:grid;
+      place-items:center;
+      text-align:center;
+    }
+
+    .hero-card{
+      width:100%;
       border-radius: var(--radius);
+      background: var(--glass);               /* NO gradient overlay */
       border: 1px solid var(--border);
-      background: linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.015));
-      box-shadow: var(--shadow);
-      position: relative;
+      box-shadow: 0 22px 70px rgba(0,0,0,0.55);
+      padding: 34px 26px 28px;
+      position:relative;
       overflow:hidden;
-    }
-    .hero:before{
-      content:"";
-      position:absolute; inset:-42% -30% auto auto;
-      width: 560px; height: 560px;
-      background: radial-gradient(circle at 30% 30%, rgba(242,230,201,0.20), transparent 56%);
-      transform: rotate(18deg);
-      pointer-events:none;
-    }
-    .hero:after{
-      content:"";
-      position:absolute; left:-180px; bottom:-220px;
-      width: 520px; height: 520px;
-      background: radial-gradient(circle at 60% 45%, rgba(242,230,201,0.10), transparent 60%);
-      pointer-events:none;
+      backdrop-filter: blur(10px);
     }
 
-    .kicker{
-      display:inline-flex; align-items:center; gap: 10px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      color: var(--cream2);
-      background: rgba(242,230,201,0.05);
-      font-size: 12px;
-      letter-spacing: 0.45px;
-      text-transform: uppercase;
-    }
+    /* remove any pseudo overlay by not using it at all */
+    .hero-card::before,
+    .hero-card::after{ content:none; }
 
-    h1{
-      margin: 16px 0 10px;
-      font-size: clamp(40px, 6.2vw, 68px);
-      letter-spacing: -1.2px;
+    .wordmark{
+      font-family:var(--wordmark);
+      font-style:italic;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      font-size: clamp(44px, 6vw, 72px);
+      margin: 6px 0 10px;
       line-height: 1.02;
+      color: rgba(255,255,255,0.90);
     }
 
-    .sub{
-      max-width: 64ch;
-      margin: 0 0 22px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.65;
+    .subhead{
+      max-width: 56ch;
+      margin: 0 auto;
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(255,255,255,0.68);
     }
 
-    .heroActions{
-      display:flex; gap: 12px; flex-wrap: wrap;
-      margin-top: 8px;
+    .subhead strong{
+      color: rgba(242,230,201,0.92);
+      font-weight: 600;
+    }
+
+    .actions{
+      margin-top: 18px;
+      display:flex;
+      gap:12px;
+      justify-content:center;
+      flex-wrap:wrap;
     }
 
     .btn{
-      display:inline-flex; align-items:center; gap: 10px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: rgba(242,230,201,0.06);
-      color: var(--cream);
-      font-size: 14px;
-    }
-    .btn:hover{ background: rgba(242,230,201,0.10); }
-    .btn.secondary{
-      background: rgba(255,255,255,0.03);
-      color: var(--text);
-      border-color: rgba(255,255,255,0.10);
-    }
-    .btn.secondary:hover{ border-color: var(--border); color: var(--cream); }
-
-    /* sections */
-    .grid{
-      margin-top: 14px;
-      display:grid;
-      grid-template-columns: 1.15fr 0.85fr;
-      gap: 14px;
-    }
-
-    @media (max-width: 900px){
-      .grid{ grid-template-columns: 1fr; }
-      header{ position: relative; }
-      .brand{ min-width: unset; }
-    }
-
-    .card{
-      border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,0.08);
-      background: rgba(255,255,255,0.02);
-      padding: 22px;
-    }
-
-    .card h2{
-      margin: 0 0 10px;
-      font-size: 13px;
-      font-weight: 700;
-      color: var(--cream);
-      letter-spacing: 0.55px;
-      text-transform: uppercase;
-    }
-
-    .muted{ color: var(--muted); line-height: 1.7; }
-
-    .list{
-      margin: 14px 0 0;
-      display:flex; flex-direction: column;
-      gap: 10px;
-    }
-
-    .item{
-      display:flex; align-items:flex-start; justify-content:space-between;
-      gap: 14px;
-      padding: 12px 12px;
-      border-radius: var(--radius2);
-      border: 1px solid rgba(242,230,201,0.12);
-      background: rgba(242,230,201,0.04);
-    }
-    .item:hover{ border-color: rgba(242,230,201,0.22); background: rgba(242,230,201,0.055); }
-
-    .item b{
-      display:block;
-      font-weight: 650;
-      color: rgba(255,255,255,0.92);
-      letter-spacing: 0.2px;
-      margin-bottom: 3px;
-    }
-
-    .meta{
-      display:flex; gap: 8px; flex-wrap: wrap;
-      color: rgba(255,255,255,0.55);
-      font-size: 12px;
-      margin-top: 2px;
-    }
-
-    .tag{
-      display:inline-flex; align-items:center;
-      padding: 6px 10px;
+      appearance:none;
+      border:1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.86);
+      padding: 10px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.02);
-      color: rgba(255,255,255,0.72);
-      font-size: 12px;
-      white-space: nowrap;
-    }
-
-    .rightCol .card{ position: sticky; top: 92px; }
-    @media (max-width: 900px){ .rightCol .card{ position: static; } }
-
-    .links{
-      margin-top: 12px;
-      display:flex; flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .linkBtn{
-      display:inline-flex; align-items:center; gap: 10px;
-      padding: 10px 12px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(255,255,255,0.02);
       font-size: 13px;
+      letter-spacing: 0.01em;
+      cursor:pointer;
+      transition: transform 140ms ease, background 140ms ease, border-color 140ms ease, color 140ms ease;
+    }
+
+    .btn:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .btn.primary{
+      border-color: rgba(242,230,201,0.28);
+      background: rgba(242,230,201,0.08);
+      color: rgba(242,230,201,0.95);
+    }
+
+    .btn.primary:hover{
+      background: rgba(242,230,201,0.11);
+      border-color: rgba(242,230,201,0.40);
+    }
+
+    /* Sections */
+    .grid{
+      margin-top: 22px;
+      width:100%;
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 14px;
+    }
+
+    .panel{
+      grid-column: span 4;
+      border-radius: var(--radius2);
+      background: var(--glass-2);
+      border:1px solid rgba(255,255,255,0.10);
+      padding: 16px 16px 14px;
+      backdrop-filter: blur(8px);
+    }
+
+    .panel h3{
+      margin: 0 0 6px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
       color: rgba(255,255,255,0.82);
     }
-    .linkBtn:hover{ border-color: rgba(242,230,201,0.22); background: rgba(242,230,201,0.05); color: var(--cream); }
 
-    .divider{
-      height: 1px;
-      background: linear-gradient(90deg, transparent, rgba(242,230,201,0.22), transparent);
-      margin: 18px 0;
+    .panel p{
+      margin: 0;
+      font-size: 13px;
+      line-height: 1.65;
+      color: rgba(255,255,255,0.62);
     }
 
+    .panel a{
+      color: rgba(242,230,201,0.92);
+      border-bottom: 1px solid rgba(242,230,201,0.30);
+    }
+
+    .panel a:hover{
+      border-bottom-color: rgba(242,230,201,0.60);
+    }
+
+    /* Footer */
     footer{
-      margin-top: 18px;
-      padding: 18px 4px 0;
-      color: rgba(255,255,255,0.50);
-      display:flex; justify-content:space-between; gap: 14px;
-      flex-wrap: wrap;
+      margin-top: 26px;
+      display:flex;
+      justify-content:center;
+      padding: 18px 0 0;
+      color: rgba(255,255,255,0.55);
       font-size: 12px;
     }
 
-    /* small util */
-    .dot{
-      width: 8px; height: 8px; border-radius: 999px;
-      background: rgba(242,230,201,0.75);
-      box-shadow: 0 0 0 4px rgba(242,230,201,0.08);
+    .footer-inner{
+      width:100%;
+      max-width: var(--max);
+      display:flex;
+      justify-content:space-between;
+      gap:12px;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
 
-    /* anchor offset for sticky header */
-    section{ scroll-margin-top: 110px; }
+    /* Responsive */
+    @media (max-width: 980px){
+      .panel{ grid-column: span 6; }
+    }
+    @media (max-width: 640px){
+      .topbar{ flex-direction: column; align-items: flex-start; }
+      .nav{ gap:10px; flex-wrap:wrap; }
+      .panel{ grid-column: span 12; }
+      .hero-card{ padding: 28px 18px 22px; }
+    }
   </style>
 </head>
+
 <body>
   <div class="wrap">
-    <header>
+    <header class="topbar">
       <div class="brand">
-        <div class="mark" aria-hidden="true"></div>
-        <b>Subtletang</b>
+        <span class="orb" aria-hidden="true"></span>
+        <div class="brand-name">Subtletang</div>
       </div>
 
-      <nav>
-        <a class="pill" href="#releases">Releases</a>
-        <a class="pill" href="#about">About</a>
-        <a class="pill" href="#links">Links</a>
+      <nav class="nav" aria-label="Primary">
+        <a href="#releases">Releases</a>
+        <a href="#about">About</a>
+        <a href="#links">Links</a>
         <a class="cta" href="mailto:hello@subtletang.com">Email</a>
       </nav>
     </header>
 
-    <main>
-      <section class="hero" id="top">
-        <div class="kicker"><span class="dot"></span> minimal / dark / cream</div>
-        <h1>Subtletang</h1>
-        <p class="sub">
-          A minimal home for releases, visuals, and everything moving under the Subtletang name.
-          Quiet design. Clean signal. No filler.
+    <main class="hero">
+      <section class="hero-card" aria-label="Subtletang intro">
+        <!-- centered title -->
+        <h1 class="wordmark">Subtletang</h1>
+
+        <p class="subhead">
+          A minimal home for releases, visuals, and everything moving under the
+          <strong>Subtletang</strong> name. Quiet design. Clean signal. No filler.
         </p>
 
-        <div class="heroActions">
-          <!-- Replace # with real links as you add them -->
-          <a class="btn" href="#releases">View releases</a>
-          <a class="btn secondary" href="#links">Open links</a>
-       
+        <div class="actions">
+          <a class="btn primary" href="#releases">View releases</a>
+          <a class="btn" href="#links">Open links</a>
+        </div>
+
+        <div class="grid" role="list" style="margin-top:18px;">
+          <div class="panel" id="releases" role="listitem">
+            <h3>Releases</h3>
+            <p>
+              Add your releases here (Spotify / Apple Music / Bandcamp / SoundCloud).
+              For now: <a href="#" onclick="return false;">coming soon</a>.
+            </p>
+          </div>
+
+          <div class="panel" id="about" role="listitem">
+            <h3>About</h3>
+            <p>
+              Subtletang is an independent project. Minimal surface, maximum intent.
+            </p>
+          </div>
+
+          <div class="panel" id="links" role="listitem">
+            <h3>Links</h3>
+            <p>
+              Drop in your socials: Instagram, YouTube, TikTok, Discord, etc.
+              Start with email: <a href="mailto:hello@subtletang.com">hello@subtletang.com</a>.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>Subtletang</div>
+        <div>Independent Project</div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
