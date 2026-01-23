@@ -2,411 +2,359 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Subtletang</title>
-  <meta name="description" content="Subtletang — releases, links, and store." />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SubtleTang</title>
+  <meta name="description" content="SubtleTang — releases, archives, and direct downloads." />
 
-  <!-- Keep your font (headline vibe) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;1,600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bgTop:#07080a;
-      --bgMid:#0b0d10;
-      --cream:#f2e6c9;
+      --bgTop:#050505;
+      --bgMid:#2a2c2d;
+      --bgBot:#e9ddb7;
 
-      --text: rgba(255,255,255,.90);
+      --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.62);
 
       --glass: rgba(255,255,255,.06);
       --glass2: rgba(255,255,255,.035);
-      --border: rgba(242,230,201,.16);
-      --shadow: 0 18px 70px rgba(0,0,0,.55);
+      --border: rgba(255,255,255,.12);
+      --border2: rgba(255,255,255,.18);
 
-      --radius: 22px;
-      --max: 1180px;
-      --pad: 28px;
+      --shadow: 0 22px 90px rgba(0,0,0,.62);
+      --radius: 26px;
 
-      --headerH: 76px;
+      --max: 1200px;
+      --pad: 26px;
+
+      --headerH: 74px;
     }
 
     *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    html, body{ height:100%; }
     body{
       margin:0;
       color:var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      background: var(--bgTop);
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      background: #000;
       overflow-x:hidden;
     }
 
-    /* Fixed background layer so the gradient never "ends" (fixes mobile cutoff) */
-    .bg{
-      position: fixed;
-      inset: 0;
-      z-index: -2;
+    /* Mobile-safe background (prevents the weird banding/cut behind cards on iOS) */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      z-index:-2;
       background:
-        radial-gradient(1000px 600px at 50% 8%, rgba(255,255,255,.08), transparent 55%),
-        linear-gradient(to bottom, var(--bgTop) 0%, var(--bgMid) 55%, var(--cream) 100%);
+        radial-gradient(900px 520px at 50% 14%, rgba(255,255,255,.10), transparent 62%),
+        linear-gradient(to bottom, var(--bgTop) 0%, var(--bgMid) 58%, var(--bgBot) 100%);
       transform: translateZ(0);
     }
-    /* soft vignette / depth */
-    .bg::after{
-      content:"";
-      position:absolute;
-      inset:-2px;
-      background:
-        radial-gradient(900px 500px at 50% 20%, rgba(0,0,0,.10), transparent 70%),
-        radial-gradient(900px 600px at 50% 100%, rgba(0,0,0,.35), transparent 65%);
-      filter: blur(6px);
-      opacity:.9;
-      pointer-events:none;
-    }
 
+    /* Fixed header bar */
     header{
-      position: sticky;
-      top:0;
-      z-index: 50;
-      height: var(--headerH);
-      background: #000;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-    }
-    .headerInner{
-      max-width: var(--max);
-      height:100%;
-      margin: 0 auto;
-      padding: 0 18px;
+      position:fixed;
+      top:0; left:0; right:0;
+      height:var(--headerH);
       display:flex;
       align-items:center;
-      justify-content: space-between;
-      gap: 12px;
+      justify-content:space-between;
+      padding: 0 18px;
+      background: #000;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      z-index:1000;
     }
 
     .brand{
       display:flex;
       align-items:center;
       gap:12px;
-      min-width: 140px;
+      min-width: 180px;
     }
-    .logoDot{
-      width: 26px;
-      height: 26px;
-      border-radius: 999px;
+    .dot{
+      width:28px; height:28px;
+      border-radius:999px;
+      border:1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.04);
-      border: 1px solid rgba(255,255,255,.12);
-      box-shadow: 0 10px 30px rgba(0,0,0,.35) inset;
-      flex: 0 0 auto;
+      box-shadow: inset 0 0 0 1px rgba(0,0,0,.25);
     }
     .brandName{
-      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono";
       font-style: italic;
-      font-weight: 600;
-      letter-spacing: .4px;
-      font-size: 15px;
-      color: rgba(255,255,255,.92);
+      letter-spacing:.2px;
+      font-weight:600;
     }
 
-    .menuWrap{ position: relative; }
+    .menuWrap{ position:relative; }
     .menuBtn{
-      appearance:none;
-      border: 1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.88);
-      border-radius: 999px;
-      padding: 10px 14px;
-      cursor: pointer;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      font-size: 14px;
-      line-height: 1;
-      user-select:none;
-    }
-    .chev{
-      width: 10px;
-      height: 10px;
-      border-right: 2px solid rgba(255,255,255,.6);
-      border-bottom: 2px solid rgba(255,255,255,.6);
-      transform: rotate(45deg);
-      margin-top: -2px;
-    }
-
-    .menuPanel{
-      position:absolute;
-      right:0;
-      top: calc(100% + 10px);
-      width: 220px;
-      border-radius: 16px;
-      background: rgba(10,10,12,.92);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: var(--shadow);
-      padding: 10px;
-      display:none;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .menuPanel.open{ display:block; }
-    .menuPanel a{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      gap:10px;
-      text-decoration:none;
-      color: rgba(255,255,255,.88);
-      padding: 10px 10px;
-      border-radius: 12px;
-      font-size: 14px;
-    }
-    .menuPanel a:hover{
-      background: rgba(255,255,255,.06);
-    }
-    .menuPanel small{
-      color: rgba(255,255,255,.55);
-      font-size: 12px;
-    }
-
-    main{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 28px 18px 96px;
-    }
-
-    /* Top label */
-    .pillTop{
-      display:flex;
-      justify-content:center;
-      margin: 28px 0 24px;
-    }
-    .pill{
       display:inline-flex;
       align-items:center;
       gap:10px;
       padding: 10px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.12);
+      border-radius:999px;
+      border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.74);
-      font-size: 13px;
-      letter-spacing: .2px;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      color: rgba(255,255,255,.85);
+      cursor:pointer;
+      user-select:none;
+      font: inherit;
     }
-    .dot{
-      width: 5px;
-      height: 5px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.50);
+    .chev{
+      width:10px;height:10px;
+      border-right:2px solid rgba(255,255,255,.65);
+      border-bottom:2px solid rgba(255,255,255,.65);
+      transform: rotate(45deg);
+      margin-top:-2px;
     }
 
-    /* Cards grid */
-    .grid{
+    .menu{
+      position:absolute;
+      right:0;
+      top: calc(100% + 10px);
+      min-width: 220px;
+      padding: 10px;
+      border-radius: 18px;
+      background: rgba(0,0,0,.82);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 22px 70px rgba(0,0,0,.55);
+      backdrop-filter: blur(10px);
+      display:none;
+    }
+    .menu.open{ display:block; }
+
+    .menu a{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding: 12px 12px;
+      border-radius: 14px;
+      color: rgba(255,255,255,.85);
+      text-decoration:none;
+      border: 1px solid transparent;
+    }
+    .menu a:hover{
+      background: rgba(255,255,255,.06);
+      border-color: rgba(255,255,255,.12);
+    }
+    .menu small{ color: rgba(255,255,255,.45); }
+
+    main{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: calc(var(--headerH) + 46px) var(--pad) 42px;
+    }
+
+    /* The "Navigate • Hub" pill */
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      padding: 10px 16px;
+      border-radius: 999px;
+      border:1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.72);
+      margin: 0 auto 26px;
+    }
+    .pillDot{
+      width:6px;height:6px;border-radius:99px;
+      background: rgba(255,255,255,.45);
+    }
+
+    /* OLD-STYLE BIG CARDS (but still whole-card clickable like the new build) */
+    .hubGrid{
       display:grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 18px;
-      align-items: stretch;
-      margin-top: 10px;
-    }
-    @media (max-width: 980px){
-      .grid{ grid-template-columns: 1fr; }
+      align-items:stretch;
     }
 
-    .cardLink{
+    .hubCard{
+      position:relative;
+      display:flex;
+      flex-direction:column;
+      justify-content:space-between;
       text-decoration:none;
-      color: inherit;
-      display:block;
+      color: var(--text);
       border-radius: var(--radius);
-      background: linear-gradient(to bottom, rgba(255,255,255,.065), rgba(255,255,255,.035));
-      border: 1px solid rgba(242,230,201,.14);
+      padding: 22px 22px 18px;
+      background:
+        radial-gradient(1200px 520px at 50% 0%, rgba(255,255,255,.10), transparent 60%),
+        linear-gradient(to bottom, rgba(255,255,255,.08), rgba(255,255,255,.035));
+      border: 1px solid var(--border2);
       box-shadow: var(--shadow);
-      padding: 20px;
-      min-height: 210px;
-      position: relative;
+      min-height: 210px;  /* this is what makes it feel “like more is going on” */
       overflow:hidden;
-      transform: translateZ(0);
-      transition: transform .18s ease, border-color .18s ease, background .18s ease;
+      transition: transform .14s ease, border-color .14s ease, background .14s ease;
     }
-    .cardLink::before{
-      content:"";
-      position:absolute;
-      inset:-40px -40px auto -40px;
-      height: 140px;
-      background: radial-gradient(220px 120px at 30% 30%, rgba(255,255,255,.10), transparent 70%);
-      opacity:.7;
-      pointer-events:none;
-    }
-    .cardLink:hover{
+    .hubCard:hover{
       transform: translateY(-2px);
-      border-color: rgba(242,230,201,.22);
-      background: linear-gradient(to bottom, rgba(255,255,255,.075), rgba(255,255,255,.040));
+      border-color: rgba(255,255,255,.22);
+      background:
+        radial-gradient(1200px 520px at 50% 0%, rgba(255,255,255,.12), transparent 60%),
+        linear-gradient(to bottom, rgba(255,255,255,.095), rgba(255,255,255,.04));
     }
 
     .cardTop{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
-      gap: 12px;
-      margin-bottom: 12px;
+      gap: 18px;
     }
     .kicker{
-      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono";
-      font-size: 12px;
+      font-weight:700;
       letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.78);
-    }
-    .tag{
-      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono";
       font-size: 12px;
-      color: rgba(255,255,255,.52);
-      white-space: nowrap;
-      margin-top: 1px;
+      color: rgba(255,255,255,.78);
+      text-transform:uppercase;
+    }
+    .meta{
+      font-size: 12px;
+      color: rgba(255,255,255,.55);
+      letter-spacing: 1px;
+      text-transform: lowercase;
+      white-space:nowrap;
     }
 
-    .desc{
-      color: rgba(255,255,255,.70);
+    .cardBody{
+      margin-top: 12px;
+      color: rgba(255,255,255,.76);
+      line-height: 1.45;
       font-size: 14px;
-      line-height: 1.5;
-      max-width: 42ch;
-      margin: 6px 0 0;
+      max-width: 48ch;
     }
 
-    .cardBottom{
-      position:absolute;
-      left: 20px;
-      right: 20px;
-      bottom: 18px;
+    .cardFooter{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      gap: 12px;
-      color: rgba(255,255,255,.66);
-      font-size: 14px;
-    }
-    .cta{
-      display:inline-flex;
-      align-items:center;
-      gap: 10px;
-      font-weight: 600;
-      color: rgba(255,255,255,.70);
+      margin-top: 18px;
+      color: rgba(255,255,255,.62);
+      font-size: 13px;
     }
     .arrow{
-      width: 18px;
-      height: 18px;
+      width:22px; height:22px;
       border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.14);
       display:grid;
       place-items:center;
-      background: rgba(255,255,255,.04);
+      background: rgba(0,0,0,.18);
     }
-    .arrow::after{
+    .arrow::before{
       content:"";
-      width: 7px;
-      height: 7px;
-      border-right: 2px solid rgba(255,255,255,.60);
-      border-top: 2px solid rgba(255,255,255,.60);
+      width:7px;height:7px;
+      border-right:2px solid rgba(255,255,255,.65);
+      border-top:2px solid rgba(255,255,255,.65);
       transform: rotate(45deg);
-      margin-left: -1px;
+      margin-left: -2px;
     }
 
     footer{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: 18px 18px 36px;
-      color: rgba(255,255,255,.55);
+      margin-top: 26px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      color: rgba(255,255,255,.45);
       font-size: 12px;
     }
-    .footerInner{
-      display:flex;
-      justify-content:space-between;
-      gap: 12px;
-      border-top: 1px solid rgba(255,255,255,.10);
-      padding-top: 16px;
+
+    /* Responsive */
+    @media (max-width: 980px){
+      .hubGrid{ grid-template-columns: 1fr; }
+      .hubCard{ min-height: 190px; }
+      main{ padding-top: calc(var(--headerH) + 34px); }
     }
 
-    /* ensure anchors/pages don't hide behind sticky header (future-proof) */
-    section{ scroll-margin-top: calc(var(--headerH) + 16px); }
+    /* Helps anchor scroll not hide behind fixed header (for later if needed) */
+    section{ scroll-margin-top: calc(var(--headerH) + 14px); }
   </style>
 </head>
 
 <body>
-  <div class="bg" aria-hidden="true"></div>
-
   <header>
-    <div class="headerInner">
-      <div class="brand">
-        <div class="logoDot" aria-hidden="true"></div>
-        <div class="brandName">Subtletang</div>
-      </div>
+    <div class="brand">
+      <div class="dot"></div>
+      <div class="brandName">Subtletang</div>
+    </div>
 
-      <div class="menuWrap">
-        <button id="menuBtn" class="menuBtn" aria-haspopup="true" aria-expanded="false">
-          Menu <span class="chev" aria-hidden="true"></span>
-        </button>
-
-        <nav id="menu" class="menuPanel" aria-label="Site menu">
-          <a href="index.html"><span>Home</span> <small>hub</small></a>
-          <a href="releases.html"><span>Releases</span> <small>mp3/zip</small></a>
-          <a href="links.html"><span>Links</span> <small>social/music</small></a>
-          <a href="store.html"><span>Store</span> <small>merch</small></a>
-          <a href="about.html"><span>About</span> <small>statement</small></a>
-          <a href="contact.html"><span>Contact</span> <small>email</small></a>
-        </nav>
-      </div>
+    <div class="menuWrap">
+      <button id="menuBtn" class="menuBtn" aria-expanded="false">
+        Menu <span class="chev"></span>
+      </button>
+      <nav id="menu" class="menu" aria-label="Site">
+        <a href="index.html">Home <small>hub</small></a>
+        <a href="releases.html">Releases <small>mp3 / zip</small></a>
+        <a href="links.html">Links <small>platforms</small></a>
+        <a href="store.html">Store <small>merch</small></a>
+        <a href="about.html">About <small>statement</small></a>
+        <a href="contact.html">Contact <small>email</small></a>
+      </nav>
     </div>
   </header>
 
   <main>
-    <div class="pillTop">
-      <div class="pill">Navigate <span class="dot" aria-hidden="true"></span> hub</div>
+    <div style="display:flex; justify-content:center;">
+      <div class="pill">
+        <span>Navigate</span>
+        <span class="pillDot"></span>
+        <span>Hub</span>
+      </div>
     </div>
 
-    <div class="grid">
-      <a class="cardLink" href="releases.html" aria-label="Open Releases page">
-        <div class="cardTop">
-          <div class="kicker">Releases</div>
-          <div class="tag">free downloads</div>
+    <div class="hubGrid">
+      <a class="hubCard" href="releases.html" aria-label="Open Releases">
+        <div>
+          <div class="cardTop">
+            <div class="kicker">Releases</div>
+            <div class="meta">free downloads</div>
+          </div>
+          <div class="cardBody">Releases, MP3 Files, Archive, and More.</div>
         </div>
-        <p class="desc">MP3 / ZIP drops. Archives when they build up.</p>
-        <div class="cardBottom">
-          <div class="cta">Open</div>
-          <div class="arrow" aria-hidden="true"></div>
-        </div>
-      </a>
-
-      <a class="cardLink" href="links.html" aria-label="Open Links page">
-        <div class="cardTop">
-          <div class="kicker">Links</div>
-          <div class="tag">platforms</div>
-        </div>
-        <p class="desc">Instagram, SoundCloud, YouTube, Facebook. Spotify soon.</p>
-        <div class="cardBottom">
-          <div class="cta">Open</div>
-          <div class="arrow" aria-hidden="true"></div>
+        <div class="cardFooter">
+          <span>Open</span>
+          <span class="arrow" aria-hidden="true"></span>
         </div>
       </a>
 
-      <a class="cardLink" href="store.html" aria-label="Open Store page">
-        <div class="cardTop">
-          <div class="kicker">Store</div>
-          <div class="tag">merch</div>
+      <a class="hubCard" href="links.html" aria-label="Open Links">
+        <div>
+          <div class="cardTop">
+            <div class="kicker">Links</div>
+            <div class="meta">platforms</div>
+          </div>
+          <div class="cardBody">Come Find Me Here.</div>
         </div>
-        <p class="desc">Live when it’s ready.</p>
-        <div class="cardBottom">
-          <div class="cta">Open</div>
-          <div class="arrow" aria-hidden="true"></div>
+        <div class="cardFooter">
+          <span>Open</span>
+          <span class="arrow" aria-hidden="true"></span>
+        </div>
+      </a>
+
+      <a class="hubCard" href="store.html" aria-label="Open Store">
+        <div>
+          <div class="cardTop">
+            <div class="kicker">Store</div>
+            <div class="meta">merch</div>
+          </div>
+          <div class="cardBody">Coming Soon...</div>
+        </div>
+        <div class="cardFooter">
+          <span>Open</span>
+          <span class="arrow" aria-hidden="true"></span>
         </div>
       </a>
     </div>
-  </main>
 
-  <footer>
-    <div class="footerInner">
+    <footer>
       <div>Subtletang</div>
       <div>Independent Project</div>
-    </div>
-  </footer>
+    </footer>
+  </main>
 
   <script>
     const btn = document.getElementById('menuBtn');
@@ -414,11 +362,11 @@
 
     function closeMenu(){
       menu.classList.remove('open');
-      btn.setAttribute('aria-expanded','false');
+      btn.setAttribute('aria-expanded', 'false');
     }
     function openMenu(){
       menu.classList.add('open');
-      btn.setAttribute('aria-expanded','true');
+      btn.setAttribute('aria-expanded', 'true');
     }
 
     btn.addEventListener('click', (e) => {
