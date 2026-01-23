@@ -6,310 +6,343 @@
   <title>Subtletang</title>
   <meta name="description" content="Subtletang — releases, archives, and direct downloads." />
 
-  <!-- Font (keeps the clean italic headline vibe) -->
+  <!-- Font (clean italic headline vibe) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,650;1,400;1,650&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;1,500;1,700&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --bg-top:#07080a;
-      --bg-mid:#0b0d10;
+      --black: #060708;
+      --ink: rgba(255,255,255,.90);
+      --muted: rgba(255,255,255,.62);
 
-      --cream:#f2e6c9;
-      --cream-dim:rgba(242,230,201,.72);
+      --cream: #f2e6c9;
+      --creamFade: rgba(242,230,201,.72);
 
-      --text:rgba(255,255,255,.92);
-      --muted:rgba(255,255,255,.62);
+      --card: rgba(255,255,255,.06);
+      --card2: rgba(255,255,255,.035);
+      --border: rgba(242,230,201,.16);
+      --shadow: 0 18px 70px rgba(0,0,0,.55);
 
-      --card:rgba(255,255,255,.06);
-      --card2:rgba(255,255,255,.035);
-      --border:rgba(242,230,201,.16);
-      --shadow:0 18px 70px rgba(0,0,0,.55);
+      --radius: 22px;
+      --max: 1100px;
 
-      --radius:22px;
-      --max:1120px;
-
-      --headerH:76px;
+      --headerH: 76px;
     }
 
     *{ box-sizing:border-box; }
     html, body{ height:100%; }
     body{
       margin:0;
-      color:var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-      background:
-        radial-gradient(1200px 520px at 50% 0%, rgba(255,255,255,.06), transparent 55%),
-        linear-gradient(to top, rgba(242,230,201,.70) 0%, rgba(242,230,201,.30) 18%, rgba(7,8,10,.0) 55%),
-        linear-gradient(180deg, var(--bg-top), var(--bg-mid));
+      color:var(--ink);
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: var(--black);
       overflow-x:hidden;
     }
 
-    a{ color:inherit; text-decoration:none; }
-    a:hover{ opacity:.88; }
+    /* FIX: background is a fixed layer so it never "ends early" on mobile */
+    .bg{
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
 
-    /* Sticky header (solid) */
+      /* Top = black, bottom = cream. Kept subtle but obvious. */
+      background:
+        radial-gradient(1200px 700px at 50% 18%, rgba(255,255,255,.06), rgba(0,0,0,0) 55%),
+        radial-gradient(900px 600px at 15% 40%, rgba(255,255,255,.04), rgba(0,0,0,0) 62%),
+        radial-gradient(900px 600px at 85% 40%, rgba(255,255,255,.035), rgba(0,0,0,0) 62%),
+        linear-gradient(to top, var(--cream) 0%, var(--creamFade) 22%, rgba(0,0,0,.92) 62%, var(--black) 100%);
+      transform: translateZ(0);
+    }
+
+    /* solid fixed header (not see-through) */
     header{
-      position:fixed;
-      top:0; left:0; right:0;
-      height:var(--headerH);
-      z-index:1000;
-      background:#000;
-      border-bottom:1px solid rgba(255,255,255,.08);
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--headerH);
+      z-index: 50;
+      background: #000;
+      border-bottom: 1px solid rgba(255,255,255,.06);
     }
     .headerInner{
-      height:100%;
-      max-width:var(--max);
-      margin:0 auto;
-      padding:0 18px;
-      display:grid;
-      grid-template-columns: 42px 1fr auto;
+      max-width: var(--max);
+      margin: 0 auto;
+      height: 100%;
+      padding: 0 18px;
+      display:flex;
       align-items:center;
-      gap:14px;
-    }
-    .logoDot{
-      width:28px;
-      height:28px;
-      border-radius:999px;
-      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,.10), rgba(255,255,255,.02) 55%, rgba(0,0,0,.85));
-      border:1px solid rgba(255,255,255,.10);
-      box-shadow: 0 10px 30px rgba(0,0,0,.45);
+      justify-content:space-between;
+      gap: 12px;
     }
     .brand{
-      justify-self:center;
-      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-style:italic;
-      font-weight:650;
-      letter-spacing:.02em;
-      color:rgba(255,255,255,.92);
-      line-height:1;
-      user-select:none;
+      display:flex;
+      align-items:center;
+      gap: 12px;
+      min-width: 0;
+    }
+    .logoDot{
+      width: 28px;
+      height: 28px;
+      border-radius: 999px;
+      background: #0a0a0a;
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 10px 30px rgba(0,0,0,.55);
+      flex: 0 0 auto;
+    }
+    .brandName{
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-style: italic;
+      font-weight: 700;
+      letter-spacing: .01em;
+      white-space: nowrap;
+      overflow:hidden;
+      text-overflow: ellipsis;
+      color: var(--ink);
     }
 
     /* Dropdown menu */
-    .menuWrap{ position:relative; justify-self:end; }
+    .menuWrap{
+      position: relative;
+      flex: 0 0 auto;
+    }
     .menuBtn{
       display:inline-flex;
       align-items:center;
       gap:10px;
-      border-radius:999px;
-      padding:10px 14px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      color:rgba(255,255,255,.90);
-      cursor:pointer;
-      font-size:13px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: var(--ink);
+      font-weight: 600;
+      cursor: pointer;
+      user-select:none;
     }
     .chev{
-      width:10px; height:10px;
-      border-right:2px solid rgba(255,255,255,.55);
-      border-bottom:2px solid rgba(255,255,255,.55);
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid rgba(255,255,255,.7);
+      border-bottom: 2px solid rgba(255,255,255,.7);
       transform: rotate(45deg);
-      margin-top:-2px;
+      margin-top: -2px;
+      transition: transform .18s ease;
     }
-    .menu{
+    .menuWrap.open .chev{ transform: rotate(-135deg); margin-top: 2px; }
+
+    .menuPanel{
       position:absolute;
-      right:0;
-      top:calc(100% + 10px);
-      width:220px;
-      background:rgba(0,0,0,.92);
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:16px;
+      right: 0;
+      top: calc(100% + 10px);
+      width: 220px;
+      padding: 10px;
+      border-radius: 16px;
+      background: rgba(10,10,10,.96);
+      border: 1px solid rgba(255,255,255,.10);
       box-shadow: var(--shadow);
-      padding:8px;
       display:none;
     }
-    .menu.open{ display:block; }
-    .menu a{
-      display:flex;
-      justify-content:space-between;
-      align-items:center;
-      padding:10px 10px;
-      border-radius:12px;
-      font-size:13px;
-      color:rgba(255,255,255,.90);
+    .menuWrap.open .menuPanel{ display:block; }
+    .menuPanel a{
+      display:block;
+      padding: 10px 10px;
+      border-radius: 12px;
+      color: rgba(255,255,255,.85);
+      text-decoration: none;
+      font-weight: 600;
     }
-    .menu a:hover{
-      background:rgba(255,255,255,.06);
-    }
-    .menu small{
-      color:rgba(255,255,255,.52);
-      font-size:12px;
+    .menuPanel a:hover{
+      background: rgba(255,255,255,.06);
     }
 
     main{
-      max-width:var(--max);
-      margin:0 auto;
-      padding: calc(var(--headerH) + 26px) 18px 80px;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: calc(var(--headerH) + 26px) 18px 0 18px;
     }
 
-    /* Layout */
-    .stack{
-      display:flex;
-      flex-direction:column;
-      gap:16px;
+    /* BIG FIX for mobile: bottom padding so cream->black transition never slices through content */
+    .pageBottomPad{
+      padding-bottom: calc(140px + env(safe-area-inset-bottom));
+    }
+
+    .section{
+      scroll-margin-top: calc(var(--headerH) + 18px);
+      margin-bottom: 18px;
     }
 
     .card{
       border-radius: var(--radius);
-      background: linear-gradient(180deg, var(--card), var(--card2));
-      border:1px solid var(--border);
+      background: var(--card);
+      border: 1px solid rgba(255,255,255,.10);
       box-shadow: var(--shadow);
       overflow:hidden;
     }
     .cardInner{
-      padding:20px 20px;
+      padding: 20px;
+      background: linear-gradient(180deg, rgba(255,255,255,.03), rgba(0,0,0,0));
     }
 
     .cardHead{
       display:flex;
       align-items:flex-start;
       justify-content:space-between;
-      gap:14px;
-      margin-bottom:12px;
+      gap: 16px;
+      margin-bottom: 12px;
     }
     .kicker{
-      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      letter-spacing:.14em;
-      font-size:12px;
-      font-weight:650;
-      color:rgba(255,255,255,.82);
-      text-transform:uppercase;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      letter-spacing: .16em;
+      color: rgba(255,255,255,.78);
+      text-transform: uppercase;
+      margin: 0 0 6px 0;
     }
     .subkicker{
-      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size:12px;
-      color:rgba(255,255,255,.52);
-      margin-top:2px;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      color: rgba(255,255,255,.58);
+      margin: 0;
     }
-    .metaRight{
-      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size:12px;
-      color:rgba(255,255,255,.52);
-      padding-top:2px;
-      white-space:nowrap;
-    }
-
-    .line{
-      height:1px;
-      background:rgba(255,255,255,.08);
-      margin:14px 0;
+    .copy{
+      margin: 0;
+      color: rgba(255,255,255,.68);
+      line-height: 1.55;
+      font-size: 14.5px;
+      max-width: 70ch;
     }
 
     .row{
       display:flex;
+      gap: 12px;
       align-items:center;
       justify-content:space-between;
-      gap:12px;
-      padding:14px 14px;
-      border-radius:16px;
-      background:rgba(255,255,255,.05);
-      border:1px solid rgba(255,255,255,.08);
+      flex-wrap: wrap;
+      margin-top: 14px;
     }
-    .row + .row{ margin-top:10px; }
 
-    .rowTitle{
-      font-weight:650;
-      letter-spacing:.01em;
-    }
-    .rowSub{
-      margin-top:4px;
-      color:var(--muted);
-      font-size:13px;
-    }
-    .rowActions{
+    .pillRow{
       display:flex;
-      gap:8px;
-      flex-shrink:0;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
     }
     .pill{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding:8px 12px;
-      border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(242,230,201,.16);
-      color:rgba(255,255,255,.88);
-      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-      font-size:12px;
-      font-weight:650;
-      cursor:pointer;
-      white-space:nowrap;
+      padding: 10px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(242,230,201,.18);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.86);
+      text-decoration:none;
+      font-weight: 700;
+      font-size: 13px;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
     }
-    .pill:hover{ background:rgba(255,255,255,.09); }
+    .pill:hover{ background: rgba(255,255,255,.085); }
 
-    .chips{
+    .item{
+      margin-top: 12px;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
       display:flex;
-      flex-wrap:wrap;
-      gap:10px;
-      margin-top:10px;
+      align-items:center;
+      justify-content:space-between;
+      gap: 12px;
     }
-
-    section{ scroll-margin-top: calc(var(--headerH) + 18px); }
+    .itemTitle{
+      font-weight: 800;
+      margin: 0 0 4px 0;
+      color: rgba(255,255,255,.92);
+    }
+    .itemMeta{
+      margin: 0;
+      color: rgba(255,255,255,.58);
+      font-size: 12.5px;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    }
+    .rowActions{
+      display:flex;
+      gap: 8px;
+      flex-shrink: 0;
+    }
 
     footer{
-      max-width:var(--max);
-      margin: 26px auto 0;
-      padding: 18px 18px 0;
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 26px 18px calc(26px + env(safe-area-inset-bottom)) 18px;
       color: rgba(255,255,255,.55);
-      font-size:12px;
+      font-size: 12px;
+    }
+    .footerInner{
       display:flex;
       justify-content:space-between;
-      align-items:center;
+      gap: 16px;
+      border-top: 1px solid rgba(255,255,255,.06);
+      padding-top: 18px;
     }
 
-    @media (max-width: 720px){
-      .brand{ justify-self:start; }
-      .headerInner{ grid-template-columns: 42px 1fr auto; }
-      .metaRight{ display:none; }
-      .row{ flex-direction:column; align-items:flex-start; }
-      .rowActions{ width:100%; justify-content:flex-start; flex-wrap:wrap; }
+    /* Mobile tweaks */
+    @media (max-width: 560px){
+      :root{ --headerH: 72px; }
+      .cardInner{ padding: 18px; }
+      .item{ flex-direction: column; align-items: flex-start; }
+      .rowActions{ width: 100%; justify-content: flex-start; }
     }
   </style>
 </head>
 
 <body>
+  <div class="bg" aria-hidden="true"></div>
+
   <header>
     <div class="headerInner">
-      <div class="logoDot" aria-label="Logo placeholder"></div>
-      <div class="brand">Subtletang</div>
+      <div class="brand">
+        <div class="logoDot" title="Logo placeholder"></div>
+        <div class="brandName">Subtletang</div>
+      </div>
 
-      <div class="menuWrap">
+      <div class="menuWrap" id="menuWrap">
         <button class="menuBtn" id="menuBtn" aria-haspopup="true" aria-expanded="false">
           Menu <span class="chev" aria-hidden="true"></span>
         </button>
-
-        <nav class="menu" id="menu" aria-label="Site menu">
-          <a href="#releases"><span>Releases</span><small>downloads</small></a>
-          <a href="#about"><span>About</span><small>statement</small></a>
-          <a href="#links"><span>Links</span><small>platforms</small></a>
-          <a href="#store"><span>Store</span><small>merch</small></a>
-          <a href="#contact"><span>Contact</span><small>email</small></a>
-        </nav>
+        <div class="menuPanel" id="menuPanel" role="menu" aria-label="Site menu">
+          <a href="#releases" role="menuitem">Releases</a>
+          <a href="#about" role="menuitem">About</a>
+          <a href="#links" role="menuitem">Links</a>
+          <a href="#store" role="menuitem">Store</a>
+          <a href="#contact" role="menuitem">Contact</a>
+        </div>
       </div>
     </div>
   </header>
 
-  <main>
-    <div class="stack">
-
-      <!-- RELEASES -->
-      <section id="releases" class="card">
+  <main class="pageBottomPad">
+    <!-- RELEASES -->
+    <section class="section" id="releases">
+      <div class="card">
         <div class="cardInner">
           <div class="cardHead">
             <div>
-              <div class="kicker">Releases</div>
-              <div class="subkicker">Free downloads + archives</div>
+              <p class="kicker">Releases</p>
+              <p class="subkicker">Free downloads + archives</p>
             </div>
-            <div class="metaRight">MP3 / ZIP</div>
+            <p class="subkicker">repo-hosted files</p>
           </div>
 
-          <div class="row">
+          <p class="copy">Drops live here. Add MP3s (or ZIPs) to the repo and link them.</p>
+
+          <div class="item">
             <div>
-              <div class="rowTitle">Next release</div>
-              <div class="rowSub">Add files to the repo and link them here.</div>
+              <p class="itemTitle">Next release</p>
+              <p class="itemMeta">MP3 / ZIP — coming soon</p>
             </div>
             <div class="rowActions">
               <a class="pill" href="#" onclick="return false;">Details</a>
@@ -317,125 +350,136 @@
             </div>
           </div>
 
-          <div class="row">
+          <div class="item">
             <div>
-              <div class="rowTitle">Archive</div>
-              <div class="rowSub">Past drops, bundles, stems, and extras.</div>
+              <p class="itemTitle">Archive</p>
+              <p class="itemMeta">Past drops, bundles, stems, extras</p>
             </div>
             <div class="rowActions">
               <a class="pill" href="#" onclick="return false;">Listen</a>
               <a class="pill" href="#" onclick="return false;">Files</a>
             </div>
           </div>
-        </div>
-      </section>
 
-      <!-- ABOUT -->
-      <section id="about" class="card">
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section" id="about">
+      <div class="card">
         <div class="cardInner">
           <div class="cardHead">
             <div>
-              <div class="kicker">About</div>
-              <div class="subkicker">Minimal statement</div>
+              <p class="kicker">About</p>
+              <p class="subkicker">Minimal statement</p>
             </div>
-            <div class="metaRight">Subtletang</div>
+            <p class="subkicker">Subtletang</p>
           </div>
-          <div style="color: var(--muted); font-size: 14px; line-height: 1.6;">
-            Subtletang is an independent project. Releases and direct downloads live here.
-          </div>
-        </div>
-      </section>
 
-      <!-- LINKS -->
-      <section id="links" class="card">
+          <p class="copy">Independent project. Releases and direct downloads live here.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- LINKS -->
+    <section class="section" id="links">
+      <div class="card">
         <div class="cardInner">
           <div class="cardHead">
             <div>
-              <div class="kicker">Links</div>
-              <div class="subkicker">Platforms</div>
+              <p class="kicker">Links</p>
+              <p class="subkicker">Platforms</p>
             </div>
-            <div class="metaRight">social</div>
+            <p class="subkicker">socials + profiles</p>
           </div>
 
-          <div class="chips">
+          <div class="pillRow">
+            <!-- Replace href="#" with real URLs when ready -->
             <a class="pill" href="#" onclick="return false;">Instagram</a>
             <a class="pill" href="#" onclick="return false;">YouTube</a>
             <a class="pill" href="#" onclick="return false;">TikTok</a>
             <a class="pill" href="#" onclick="return false;">SoundCloud</a>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- STORE -->
-      <section id="store" class="card">
+    <!-- STORE -->
+    <section class="section" id="store">
+      <div class="card">
         <div class="cardInner">
           <div class="cardHead">
             <div>
-              <div class="kicker">Store</div>
-              <div class="subkicker">Merch + physical</div>
+              <p class="kicker">Store</p>
+              <p class="subkicker">Merch + physical</p>
             </div>
-            <div class="metaRight">soon</div>
+            <p class="subkicker">soon</p>
           </div>
 
-          <div style="color: var(--muted); font-size: 14px; line-height: 1.6;">
-            Store link goes here when it’s ready.
-          </div>
+          <p class="copy">Link will go here when it’s ready.</p>
         </div>
-      </section>
+      </div>
+    </section>
 
-      <!-- CONTACT -->
-      <section id="contact" class="card">
+    <!-- CONTACT -->
+    <section class="section" id="contact">
+      <div class="card">
         <div class="cardInner">
           <div class="cardHead">
             <div>
-              <div class="kicker">Contact</div>
-              <div class="subkicker">Email</div>
+              <p class="kicker">Contact</p>
+              <p class="subkicker">Email</p>
             </div>
-            <div class="metaRight">business</div>
+            <p class="subkicker">business</p>
           </div>
 
-          <div class="row" style="background: rgba(255,255,255,.04);">
+          <div class="item">
             <div>
-              <div class="rowTitle">subtletang@gmail.com</div>
-              <div class="rowSub">For bookings, collabs, and requests.</div>
+              <p class="itemTitle">subtletang@gmail.com</p>
+              <p class="itemMeta">Bookings / collabs / requests</p>
             </div>
             <div class="rowActions">
               <a class="pill" href="mailto:subtletang@gmail.com">Email</a>
             </div>
           </div>
         </div>
-      </section>
+      </div>
+    </section>
 
-    </div>
-
-    <footer>
-      <div>Subtletang</div>
-      <div>Independent Project</div>
-    </footer>
   </main>
 
+  <footer>
+    <div class="footerInner">
+      <div>Subtletang</div>
+      <div>Independent Project</div>
+    </div>
+  </footer>
+
   <script>
+    // Dropdown menu behavior
+    const wrap = document.getElementById('menuWrap');
     const btn = document.getElementById('menuBtn');
-    const menu = document.getElementById('menu');
+    const panel = document.getElementById('menuPanel');
 
     function closeMenu(){
-      menu.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
+      wrap.classList.remove('open');
+      btn.setAttribute('aria-expanded','false');
     }
     function openMenu(){
-      menu.classList.add('open');
-      btn.setAttribute('aria-expanded', 'true');
+      wrap.classList.add('open');
+      btn.setAttribute('aria-expanded','true');
     }
 
     btn.addEventListener('click', (e) => {
       e.stopPropagation();
-      menu.classList.contains('open') ? closeMenu() : openMenu();
+      wrap.classList.contains('open') ? closeMenu() : openMenu();
     });
 
     document.addEventListener('click', () => closeMenu());
 
-    // close after clicking a menu item
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeMenu()));
+    // Close after clicking a menu item
+    panel.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeMenu()));
   </script>
 </body>
 </html>
