@@ -72,4 +72,64 @@
       white-space:nowrap;
     }
     .pill.disabled{ opacity:.45; pointer-events:none; }
-    footer{ margin-top:26px; padding-top:18px; border-top:1px solid rgba(255,255,255,.10); display:flex; justify-content:space-betw
+    footer{ margin-top:26px; padding-top:18px; border-top:1px solid rgba(255,255,255,.10); display:flex; justify-content:space-between; color:rgba(255,255,255,.45); font-size:12px; }
+  </style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="dot"></div><div class="brandName">Subtletang</div></div>
+  <div class="menuWrap">
+    <button id="menuBtn" class="menuBtn" aria-expanded="false">Menu <span class="chev"></span></button>
+    <nav id="menu" class="menu">
+      <a href="index.html">Home <small>hub</small></a>
+      <a href="releases.html">Releases <small>mp3 / zip</small></a>
+      <a href="links.html">Links <small>platforms</small></a>
+      <a href="store.html">Store <small>merch</small></a>
+      <a href="about.html">About <small>statement</small></a>
+      <a href="contact.html">Contact <small>email</small></a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="titleRow">
+    <h1>Links</h1>
+    <div class="sub">socials + music</div>
+  </div>
+
+  <div class="panel">
+    <div class="block">
+      <div class="blockTitle">Socials</div>
+      <div class="blockSub">Updates, clips, and contact.</div>
+      <div class="pills">
+        <a class="pill" href="https://www.instagram.com/subtletang" target="_blank" rel="noopener">Instagram</a>
+        <a class="pill" href="https://www.facebook.com/p/Logan-Ryan-100076125385439/" target="_blank" rel="noopener">Facebook</a>
+        <a class="pill" href="mailto:subtletang@gmail.com">Email</a>
+      </div>
+    </div>
+
+    <div class="block">
+      <div class="blockTitle">Music</div>
+      <div class="blockSub">Where you can find the releases.</div>
+      <div class="pills">
+        <a class="pill" href="https://on.soundcloud.com/s8zCzp4dX2ACgjhZtG" target="_blank" rel="noopener">SoundCloud</a>
+        <a class="pill" href="https://www.youtube.com/channel/UCz0fuOJuNF6ILGj5sQnAWpw" target="_blank" rel="noopener">YouTube</a>
+        <span class="pill disabled">Spotify (soon)</span>
+      </div>
+    </div>
+  </div>
+
+  <footer><div>Subtletang</div><div>Independent Project</div></footer>
+</main>
+
+<script>
+  const btn = document.getElementById('menuBtn');
+  const menu = document.getElementById('menu');
+  function closeMenu(){ menu.classList.remove('open'); btn.setAttribute('aria-expanded','false'); }
+  function openMenu(){ menu.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+  btn.addEventListener('click', (e)=>{ e.stopPropagation(); menu.classList.contains('open') ? closeMenu() : openMenu(); });
+  document.addEventListener('click', ()=>closeMenu());
+  menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>closeMenu()));
+</script>
+</body>
+</html>
