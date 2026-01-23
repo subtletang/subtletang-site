@@ -2,253 +2,405 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Links — Subtletang</title>
-  <meta name="description" content="Subtletang links." />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Subtletang — Links</title>
+  <meta name="description" content="Subtletang links — socials and music platforms." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,600;1,600&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      --black:#07080a;
-      --black2:#0b0d10;
+      --bgTop:#07080a;
+      --bgMid:#0b0d10;
       --cream:#f2e6c9;
 
-      --text:rgba(255,255,255,.90);
-      --muted:rgba(255,255,255,.62);
+      --text: rgba(255,255,255,.90);
+      --muted: rgba(255,255,255,.62);
 
-      --shadow:0 18px 70px rgba(0,0,0,.55);
-      --radius:22px;
+      --glass: rgba(255,255,255,.06);
+      --glass2: rgba(255,255,255,.035);
+      --border: rgba(242,230,201,.16);
+      --shadow: 0 18px 70px rgba(0,0,0,.55);
 
-      --max:1100px;
-      --pad:28px;
-      --headerH:76px;
+      --radius: 22px;
+      --max: 1180px;
+      --pad: 28px;
+
+      --headerH: 76px;
     }
 
     *{ box-sizing:border-box; }
-    html, body{ height:100%; }
+    html,body{ height:100%; }
     body{
       margin:0;
       color:var(--text);
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
-      background:
-        linear-gradient(to top, var(--cream) 0%, rgba(242,230,201,.65) 18%, rgba(242,230,201,0) 60%),
-        radial-gradient(1200px 700px at 50% 12%, rgba(255,255,255,.08) 0%, rgba(255,255,255,0) 60%),
-        linear-gradient(to bottom, var(--black) 0%, var(--black2) 100%);
-      background-attachment: fixed;
+      background: var(--bgTop);
       overflow-x:hidden;
     }
-    a{ color:inherit; text-decoration:none; }
+
+    .bg{
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(1000px 600px at 50% 8%, rgba(255,255,255,.08), transparent 55%),
+        linear-gradient(to bottom, var(--bgTop) 0%, var(--bgMid) 55%, var(--cream) 100%);
+      transform: translateZ(0);
+    }
+    .bg::after{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:
+        radial-gradient(900px 500px at 50% 20%, rgba(0,0,0,.10), transparent 70%),
+        radial-gradient(900px 600px at 50% 100%, rgba(0,0,0,.35), transparent 65%);
+      filter: blur(6px);
+      opacity:.9;
+      pointer-events:none;
+    }
 
     header{
-      position:fixed;
-      top:0; left:0; right:0;
-      height:var(--headerH);
-      z-index:50;
-      background: rgba(0,0,0,0.96);
-      border-bottom:1px solid rgba(255,255,255,.06);
+      position: sticky;
+      top:0;
+      z-index: 50;
+      height: var(--headerH);
+      background: #000;
+      border-bottom: 1px solid rgba(255,255,255,.08);
     }
     .headerInner{
+      max-width: var(--max);
       height:100%;
-      width:min(var(--max), calc(100% - 2*var(--pad)));
-      margin:0 auto;
+      margin: 0 auto;
+      padding: 0 18px;
       display:flex;
       align-items:center;
-      justify-content:space-between;
-      gap:14px;
+      justify-content: space-between;
+      gap: 12px;
     }
+
     .brand{
       display:flex;
       align-items:center;
       gap:12px;
-      min-width:160px;
+      min-width: 140px;
     }
-    .logo{
-      width:34px; height:34px;
-      border-radius:999px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      box-shadow: 0 10px 30px rgba(0,0,0,.45);
+    .logoDot{
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.04);
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 10px 30px rgba(0,0,0,.35) inset;
+      flex: 0 0 auto;
     }
-    .wordmark{
-      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+    .brandName{
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono";
       font-style: italic;
       font-weight: 600;
-      letter-spacing: -0.02em;
+      letter-spacing: .4px;
+      font-size: 15px;
       color: rgba(255,255,255,.92);
-      white-space: nowrap;
     }
-    .headerCenter{
-      flex:1;
-      display:flex;
-      justify-content:center;
-      pointer-events:none;
-    }
-    .headerCenter a{ pointer-events:auto; }
 
-    .menuWrap{ position:relative; min-width:160px; display:flex; justify-content:flex-end; }
+    .menuWrap{ position: relative; }
     .menuBtn{
-      display:inline-flex;
+      appearance:none;
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.88);
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor: pointer;
+      display:flex;
       align-items:center;
       gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      background: rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      color:rgba(255,255,255,.88);
-      font-weight:700;
-      cursor:pointer;
+      font-size: 14px;
+      line-height: 1;
       user-select:none;
     }
     .chev{
-      width:10px; height:10px;
-      border-right:2px solid rgba(255,255,255,.75);
-      border-bottom:2px solid rgba(255,255,255,.75);
+      width: 10px;
+      height: 10px;
+      border-right: 2px solid rgba(255,255,255,.6);
+      border-bottom: 2px solid rgba(255,255,255,.6);
       transform: rotate(45deg);
-      margin-top:-2px;
+      margin-top: -2px;
     }
-    .menu{
+
+    .menuPanel{
       position:absolute;
-      top: calc(100% + 10px);
       right:0;
-      width: 240px;
-      background: rgba(10,10,10,.96);
-      border: 1px solid rgba(255,255,255,.10);
+      top: calc(100% + 10px);
+      width: 220px;
       border-radius: 16px;
+      background: rgba(10,10,12,.92);
+      border: 1px solid rgba(255,255,255,.10);
       box-shadow: var(--shadow);
-      padding: 8px;
+      padding: 10px;
       display:none;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
-    .menu.open{ display:block; }
-    .menu a{
-      display:block;
-      padding: 12px 12px;
+    .menuPanel.open{ display:block; }
+    .menuPanel a{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:10px;
+      text-decoration:none;
+      color: rgba(255,255,255,.88);
+      padding: 10px 10px;
       border-radius: 12px;
-      color: rgba(255,255,255,.86);
-      font-weight: 700;
+      font-size: 14px;
     }
-    .menu a:hover{ background: rgba(255,255,255,.06); }
-    .menu small{
-      display:block;
-      margin-top:2px;
-      font-weight:600;
-      color: rgba(255,255,255,.55);
-      font-size:12px;
+    .menuPanel a:hover{ background: rgba(255,255,255,.06); }
+    .menuPanel small{ color: rgba(255,255,255,.55); font-size: 12px; }
+
+    main{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 26px 18px 96px;
     }
 
-    .wrap{
-      width:min(var(--max), calc(100% - 2*var(--pad)));
-      margin:0 auto;
-      padding-top: calc(var(--headerH) + 26px);
-      padding-bottom: 80px;
-    }
-
-    .titleRow{
+    .topRow{
       display:flex;
       align-items:flex-end;
       justify-content:space-between;
-      gap:12px;
-      margin-bottom: 14px;
+      gap: 14px;
+      margin: 22px 0 18px;
+    }
+    .pageTitle{
+      display:flex;
+      flex-direction:column;
+      gap: 6px;
     }
     .kicker{
-      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono";
       font-size: 12px;
-      letter-spacing: .12em;
+      letter-spacing: 2px;
       text-transform: uppercase;
       color: rgba(255,255,255,.78);
-      margin:0;
     }
-    .muted{ color: rgba(255,255,255,.55); font-size: 13px; margin:0; }
+    .subtitle{
+      color: rgba(255,255,255,.64);
+      font-size: 14px;
+      line-height: 1.5;
+      max-width: 60ch;
+    }
+    .tagRight{
+      font-family:"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono";
+      font-size: 12px;
+      color: rgba(255,255,255,.50);
+      white-space:nowrap;
+    }
 
-    .card{
+    .panel{
       border-radius: var(--radius);
-      border: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(255,255,255,.03) 100%);
+      background: linear-gradient(to bottom, rgba(255,255,255,.065), rgba(255,255,255,.035));
+      border: 1px solid rgba(242,230,201,.14);
       box-shadow: var(--shadow);
+      padding: 18px;
+      position: relative;
       overflow:hidden;
     }
-    .cardInner{ padding: 18px; }
-    .chips{
+    .panel::before{
+      content:"";
+      position:absolute;
+      inset:-40px -40px auto -40px;
+      height: 140px;
+      background: radial-gradient(220px 120px at 30% 30%, rgba(255,255,255,.10), transparent 70%);
+      opacity:.65;
+      pointer-events:none;
+    }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1.1fr .9fr;
+      gap: 18px;
+      margin-top: 14px;
+      align-items: start;
+    }
+    @media (max-width: 980px){
+      .grid{ grid-template-columns: 1fr; }
+      .topRow{ flex-direction:column; align-items:flex-start; }
+    }
+
+    .groupTitle{
       display:flex;
-      flex-wrap:wrap;
-      gap:10px;
+      align-items:baseline;
+      justify-content:space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .pills{
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
       margin-top: 10px;
     }
-    .pill{
+    .pillLink{
       display:inline-flex;
       align-items:center;
       justify-content:center;
-      padding: 10px 12px;
+      padding: 10px 14px;
       border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
-      border:1px solid rgba(242,230,201,.16);
-      color: rgba(255,255,255,.88);
-      font-size: 12.5px;
-      font-weight: 700;
-      cursor:pointer;
+      color: rgba(255,255,255,.85);
+      text-decoration:none;
+      font-size: 13px;
+      line-height: 1;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease;
+      user-select:none;
       white-space:nowrap;
     }
-    .pill:hover{ background: rgba(255,255,255,.08); }
+    .pillLink:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,.08);
+      border-color: rgba(242,230,201,.22);
+    }
+    .pillLink.disabled{
+      opacity: .55;
+      cursor: default;
+      pointer-events:none;
+    }
 
-    @media (max-width: 680px){
-      :root{ --pad:18px; --headerH:72px; }
-      .headerInner{ width: calc(100% - 2*var(--pad)); }
-      .wrap{ width: calc(100% - 2*var(--pad)); }
-      .headerCenter{ display:none; }
-      .brand, .menuWrap{ min-width:120px; }
+    .mini{
+      color: rgba(255,255,255,.64);
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0;
+      max-width: 58ch;
+    }
+
+    .emailCard{
+      margin-top: 14px;
+      padding: 16px;
+      border-radius: 18px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(0,0,0,.20);
+    }
+    .emailAddr{
+      font-size: 18px;
+      font-weight: 650;
+      letter-spacing: .2px;
+      margin: 0 0 6px;
+    }
+    .emailNote{
+      margin: 0 0 12px;
+      color: rgba(255,255,255,.62);
+      font-size: 13px;
+    }
+
+    footer{
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 18px 18px 36px;
+      color: rgba(255,255,255,.55);
+      font-size: 12px;
+    }
+    .footerInner{
+      display:flex;
+      justify-content:space-between;
+      gap: 12px;
+      border-top: 1px solid rgba(255,255,255,.10);
+      padding-top: 16px;
     }
   </style>
 </head>
 
 <body>
+  <div class="bg" aria-hidden="true"></div>
+
   <header>
     <div class="headerInner">
       <div class="brand">
-        <div class="logo" aria-hidden="true"></div>
-      </div>
-
-      <div class="headerCenter">
-        <a class="wordmark" href="index.html">Subtletang</a>
+        <div class="logoDot" aria-hidden="true"></div>
+        <div class="brandName">Subtletang</div>
       </div>
 
       <div class="menuWrap">
-        <button class="menuBtn" id="menuBtn" aria-haspopup="true" aria-expanded="false" aria-controls="menu">
+        <button id="menuBtn" class="menuBtn" aria-haspopup="true" aria-expanded="false">
           Menu <span class="chev" aria-hidden="true"></span>
         </button>
 
-        <nav class="menu" id="menu" aria-label="Site menu">
-          <a href="index.html">Home <small>hub</small></a>
-          <a href="releases.html">Releases <small>downloads + archives</small></a>
-          <a href="about.html">About <small>project</small></a>
-          <a href="links.html">Links <small>platforms</small></a>
-          <a href="store.html">Store <small>merch</small></a>
-          <a href="contact.html">Contact <small>email</small></a>
+        <nav id="menu" class="menuPanel" aria-label="Site menu">
+          <a href="index.html"><span>Home</span> <small>hub</small></a>
+          <a href="releases.html"><span>Releases</span> <small>mp3/zip</small></a>
+          <a href="links.html"><span>Links</span> <small>social/music</small></a>
+          <a href="store.html"><span>Store</span> <small>merch</small></a>
+          <a href="about.html"><span>About</span> <small>statement</small></a>
+          <a href="contact.html"><span>Contact</span> <small>email</small></a>
         </nav>
       </div>
     </div>
   </header>
 
-  <main class="wrap">
-    <div class="titleRow">
-      <p class="kicker">Links</p>
-      <p class="muted">Platforms</p>
+  <main>
+    <div class="topRow">
+      <div class="pageTitle">
+        <div class="kicker">Links</div>
+        <div class="subtitle">Everything official — socials and the places you can find the music.</div>
+      </div>
+      <div class="tagRight">Platforms</div>
     </div>
 
-    <div class="card">
-      <div class="cardInner">
-        <div class="chips">
-          <a class="pill" href="https://www.instagram.com/subtletang" target="_blank" rel="noopener">Instagram</a>
-          <a class="pill" href="https://on.soundcloud.com/s8zCzp4dX2ACgjhZtG" target="_blank" rel="noopener">SoundCloud</a>
-          <a class="pill" href="https://www.youtube.com/channel/UCz0fuOJuNF6ILGj5sQnAWpw" target="_blank" rel="noopener">YouTube</a>
-          <a class="pill" href="https://www.facebook.com/p/Logan-Ryan-100076125385439/" target="_blank" rel="noopener">Facebook</a>
-          <a class="pill" href="#" onclick="return false;">Spotify (soon)</a>
-          <a class="pill" href="mailto:subtletang@gmail.com">Email</a>
+    <div class="grid">
+      <!-- LEFT: Socials + Music -->
+      <div class="panel">
+        <div class="groupTitle">
+          <div class="kicker">Socials</div>
+          <div class="tagRight">updates + visuals</div>
+        </div>
+        <p class="mini">Follow the project, announcements, clips, and whatever we’re building next.</p>
+        <div class="pills">
+          <a class="pillLink" href="https://www.instagram.com/subtletang" target="_blank" rel="noopener">Instagram</a>
+          <a class="pillLink" href="https://www.facebook.com/p/Logan-Ryan-100076125385439/" target="_blank" rel="noopener">Facebook</a>
+        </div>
+
+        <div style="height:14px;"></div>
+
+        <div class="groupTitle">
+          <div class="kicker">Music</div>
+          <div class="tagRight">listen + archive</div>
+        </div>
+        <p class="mini">Where the catalog lives right now. Spotify link goes live when it’s ready.</p>
+        <div class="pills">
+          <a class="pillLink" href="https://on.soundcloud.com/s8zCzp4dX2ACgjhZtG" target="_blank" rel="noopener">SoundCloud</a>
+          <a class="pillLink" href="https://www.youtube.com/channel/UCz0fuOJuNF6ILGj5sQnAWpw" target="_blank" rel="noopener">YouTube</a>
+          <span class="pillLink disabled" aria-disabled="true">Spotify (soon)</span>
+        </div>
+      </div>
+
+      <!-- RIGHT: Contact -->
+      <div class="panel">
+        <div class="groupTitle">
+          <div class="kicker">Contact</div>
+          <div class="tagRight">bookings</div>
+        </div>
+        <p class="mini">Collabs, bookings, requests. Keep it simple.</p>
+
+        <div class="emailCard">
+          <p class="emailAddr">subtletang@gmail.com</p>
+          <p class="emailNote">For bookings, collabs, and requests.</p>
+          <div class="pills">
+            <a class="pillLink" href="mailto:subtletang@gmail.com">Email</a>
+          </div>
         </div>
       </div>
     </div>
   </main>
+
+  <footer>
+    <div class="footerInner">
+      <div>Subtletang</div>
+      <div>Independent Project</div>
+    </div>
+  </footer>
 
   <script>
     const btn = document.getElementById('menuBtn');
@@ -256,11 +408,11 @@
 
     function closeMenu(){
       menu.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-expanded','false');
     }
     function openMenu(){
       menu.classList.add('open');
-      btn.setAttribute('aria-expanded', 'true');
+      btn.setAttribute('aria-expanded','true');
     }
 
     btn.addEventListener('click', (e) => {
