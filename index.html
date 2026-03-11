@@ -203,15 +203,23 @@ color:var(--logoBg);
 border-radius:var(--radius);
 padding:22px;
 border:1px solid var(--border2);
-background:rgba(27,47,122,.08);
+background:linear-gradient(
+160deg,
+rgba(15,26,58,.95) 0%,
+rgba(27,47,122,.65) 100%
+);
 box-shadow:var(--shadow);
 min-height:210px;
-transition:.15s ease;
+transition:.2s ease;
 }
 
 .hubCard:hover{
-transform:translateY(-2px);
-background:rgba(27,47,122,.18);
+transform:translateY(-3px);
+background:linear-gradient(
+160deg,
+rgba(27,47,122,.9) 0%,
+rgba(15,26,58,1) 100%
+);
 }
 
 .cardTop{
