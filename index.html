@@ -1,377 +1,439 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>subtletang</title>
-  <meta name="description" content="subtletang — releases, archives, and direct downloads." />
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>subtletang</title>
+<meta name="description" content="subtletang — releases, archives, and direct downloads.">
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-  <style>
-    :root{
-      --bgTop:#06121f;
-      --bgMid:#10243a;
-      --bgBot:#f3ead7;
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet">
 
-      --text: rgba(255,255,255,.94);
-      --muted: rgba(255,255,255,.66);
+<style>
 
-      --glass: rgba(255,255,255,.06);
-      --glass2: rgba(255,255,255,.035);
-      --border: rgba(255,255,255,.12);
-      --border2: rgba(255,255,255,.18);
+:root{
+--navy:#0f1a3a;
+--logoBlue:#1b2f7a;
+--cream:#f4ecd8;
 
-      --shadow: 0 22px 90px rgba(0,0,0,.48);
-      --radius: 26px;
+--text:var(--cream);
+--muted:rgba(244,236,216,.65);
 
-      --max: 1200px;
-      --pad: 26px;
+--border:rgba(255,255,255,.14);
+--border2:rgba(255,255,255,.18);
 
-      --headerH: 74px;
-    }
+--shadow:0 20px 70px rgba(0,0,0,.5);
 
-    *{ box-sizing:border-box; }
-    html, body{ height:100%; }
-    body{
-      margin:0;
-      color:var(--text);
-      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
-      background: #06121f;
-      overflow-x:hidden;
-    }
+--radius:26px;
+--max:1200px;
+--pad:26px;
+--headerH:74px;
+}
 
-    body::before{
-      content:"";
-      position:fixed;
-      inset:0;
-      z-index:-2;
-      background:
-        radial-gradient(900px 520px at 50% 14%, rgba(255,255,255,.08), transparent 62%),
-        linear-gradient(to bottom, var(--bgTop) 0%, var(--bgMid) 58%, var(--bgBot) 100%);
-      transform: translateZ(0);
-    }
+*{
+box-sizing:border-box;
+}
 
-    header{
-      position:fixed;
-      top:0; left:0; right:0;
-      height:var(--headerH);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 0 18px;
-      background: #07111d;
-      border-bottom: 1px solid rgba(255,255,255,.08);
-      z-index:1000;
-    }
+html,body{
+height:100%;
+}
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:12px;
-      min-width: 180px;
-    }
+body{
+margin:0;
+font-family:"JetBrains Mono", monospace;
+background:var(--navy);
+color:var(--cream);
+overflow-x:hidden;
+}
 
-    .logo{
-      width:32px;
-      height:32px;
-      object-fit:contain;
-      display:block;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,.22));
-    }
+/* header */
 
-    .brandName{
-      font-style: italic;
-      letter-spacing:.2px;
-      font-weight:600;
-    }
+header{
+position:fixed;
+top:0;
+left:0;
+right:0;
+height:var(--headerH);
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:0 18px;
+background:var(--navy);
+border-bottom:1px solid rgba(255,255,255,.08);
+z-index:1000;
+}
 
-    .menuWrap{ position:relative; }
-    .menuBtn{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding: 10px 14px;
-      border-radius:999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: rgba(255,255,255,.85);
-      cursor:pointer;
-      user-select:none;
-      font: inherit;
-    }
-    .chev{
-      width:10px;height:10px;
-      border-right:2px solid rgba(255,255,255,.65);
-      border-bottom:2px solid rgba(255,255,255,.65);
-      transform: rotate(45deg);
-      margin-top:-2px;
-    }
+.brand{
+display:flex;
+align-items:center;
+gap:12px;
+min-width:180px;
+}
 
-    .menu{
-      position:absolute;
-      right:0;
-      top: calc(100% + 10px);
-      min-width: 220px;
-      padding: 10px;
-      border-radius: 18px;
-      background: rgba(6,18,31,.9);
-      border: 1px solid rgba(255,255,255,.14);
-      box-shadow: 0 22px 70px rgba(0,0,0,.55);
-      backdrop-filter: blur(10px);
-      display:none;
-    }
-    .menu.open{ display:block; }
+.logo{
+width:40px;
+height:40px;
+border-radius:50%;
+object-fit:cover;
+background:#fff;
+padding:3px;
+border:2px solid var(--logoBlue);
+}
 
-    .menu a{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding: 12px 12px;
-      border-radius: 14px;
-      color: rgba(255,255,255,.85);
-      text-decoration:none;
-      border: 1px solid transparent;
-    }
-    .menu a:hover{
-      background: rgba(255,255,255,.06);
-      border-color: rgba(255,255,255,.12);
-    }
-    .menu small{ color: rgba(255,255,255,.45); }
+.brandName{
+font-style:italic;
+font-weight:600;
+letter-spacing:.2px;
+}
 
-    main{
-      max-width: var(--max);
-      margin: 0 auto;
-      padding: calc(var(--headerH) + 46px) var(--pad) 42px;
-    }
+/* menu */
 
-    .pill{
-      display:inline-flex;
-      align-items:center;
-      gap:12px;
-      padding: 10px 16px;
-      border-radius: 999px;
-      border:1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.05);
-      color: rgba(255,255,255,.72);
-      margin: 0 auto 26px;
-    }
-    .pillDot{
-      width:6px;height:6px;border-radius:99px;
-      background: rgba(255,255,255,.45);
-    }
+.menuWrap{
+position:relative;
+}
 
-    .hubGrid{
-      display:grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 18px;
-      align-items:stretch;
-    }
+.menuBtn{
+display:inline-flex;
+align-items:center;
+gap:10px;
+padding:10px 14px;
+border-radius:999px;
+border:1px solid var(--border);
+background:rgba(255,255,255,.06);
+color:var(--cream);
+cursor:pointer;
+font:inherit;
+}
 
-    .hubCard{
-      position:relative;
-      display:flex;
-      flex-direction:column;
-      justify-content:space-between;
-      text-decoration:none;
-      color: var(--text);
-      border-radius: var(--radius);
-      padding: 22px 22px 18px;
-      background:
-        radial-gradient(1200px 520px at 50% 0%, rgba(255,255,255,.10), transparent 60%),
-        linear-gradient(to bottom, rgba(255,255,255,.08), rgba(255,255,255,.035));
-      border: 1px solid var(--border2);
-      box-shadow: var(--shadow);
-      min-height: 210px;
-      overflow:hidden;
-      transition: transform .14s ease, border-color .14s ease, background .14s ease;
-    }
-    .hubCard:hover{
-      transform: translateY(-2px);
-      border-color: rgba(255,255,255,.22);
-      background:
-        radial-gradient(1200px 520px at 50% 0%, rgba(255,255,255,.12), transparent 60%),
-        linear-gradient(to bottom, rgba(255,255,255,.095), rgba(255,255,255,.04));
-    }
+.chev{
+width:10px;
+height:10px;
+border-right:2px solid var(--cream);
+border-bottom:2px solid var(--cream);
+transform:rotate(45deg);
+margin-top:-2px;
+}
 
-    .cardTop{
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 18px;
-    }
-    .kicker{
-      font-weight:700;
-      letter-spacing: 2px;
-      font-size: 12px;
-      color: rgba(255,255,255,.78);
-      text-transform:uppercase;
-    }
-    .meta{
-      font-size: 12px;
-      color: rgba(255,255,255,.55);
-      letter-spacing: 1px;
-      text-transform: lowercase;
-      white-space:nowrap;
-    }
+.menu{
+position:absolute;
+right:0;
+top:calc(100% + 10px);
+min-width:220px;
+padding:10px;
+border-radius:18px;
+background:var(--navy);
+border:1px solid var(--border);
+box-shadow:0 22px 70px rgba(0,0,0,.55);
+display:none;
+}
 
-    .cardBody{
-      margin-top: 12px;
-      color: rgba(255,255,255,.76);
-      line-height: 1.45;
-      font-size: 14px;
-      max-width: 48ch;
-    }
+.menu.open{
+display:block;
+}
 
-    .cardFooter{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      margin-top: 18px;
-      color: rgba(255,255,255,.62);
-      font-size: 13px;
-    }
-    .arrow{
-      width:22px; height:22px;
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      display:grid;
-      place-items:center;
-      background: rgba(0,0,0,.18);
-    }
-    .arrow::before{
-      content:"";
-      width:7px;height:7px;
-      border-right:2px solid rgba(255,255,255,.65);
-      border-top:2px solid rgba(255,255,255,.65);
-      transform: rotate(45deg);
-      margin-left: -2px;
-    }
+.menu a{
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:12px;
+border-radius:14px;
+color:var(--cream);
+text-decoration:none;
+border:1px solid transparent;
+}
 
-    footer{
-      margin-top: 26px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(255,255,255,.10);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      color: rgba(255,255,255,.45);
-      font-size: 12px;
-    }
+.menu a:hover{
+background:rgba(27,47,122,.15);
+border-color:rgba(27,47,122,.45);
+}
 
-    @media (max-width: 980px){
-      .hubGrid{ grid-template-columns: 1fr; }
-      .hubCard{ min-height: 190px; }
-      main{ padding-top: calc(var(--headerH) + 34px); }
-    }
+.menu small{
+color:var(--muted);
+}
 
-    section{ scroll-margin-top: calc(var(--headerH) + 14px); }
-  </style>
+/* main */
+
+main{
+max-width:var(--max);
+margin:0 auto;
+padding:calc(var(--headerH) + 46px) var(--pad) 42px;
+}
+
+/* pill */
+
+.pillWrap{
+display:flex;
+justify-content:center;
+}
+
+.pill{
+display:inline-flex;
+align-items:center;
+gap:12px;
+padding:10px 16px;
+border-radius:999px;
+border:1px solid var(--border);
+background:rgba(255,255,255,.05);
+margin-bottom:26px;
+}
+
+.pillDot{
+width:6px;
+height:6px;
+border-radius:99px;
+background:var(--logoBlue);
+}
+
+/* cards */
+
+.hubGrid{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:18px;
+}
+
+.hubCard{
+display:flex;
+flex-direction:column;
+justify-content:space-between;
+text-decoration:none;
+color:var(--cream);
+border-radius:var(--radius);
+padding:22px;
+border:1px solid var(--border2);
+background:rgba(27,47,122,.08);
+box-shadow:var(--shadow);
+min-height:210px;
+transition:.15s ease;
+}
+
+.hubCard:hover{
+transform:translateY(-2px);
+background:rgba(27,47,122,.15);
+}
+
+.cardTop{
+display:flex;
+justify-content:space-between;
+}
+
+.kicker{
+font-size:12px;
+letter-spacing:2px;
+text-transform:uppercase;
+font-weight:700;
+}
+
+.meta{
+font-size:12px;
+color:var(--muted);
+text-transform:lowercase;
+}
+
+.cardBody{
+margin-top:12px;
+line-height:1.4;
+font-size:14px;
+max-width:48ch;
+color:rgba(244,236,216,.85);
+}
+
+.cardFooter{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-top:18px;
+font-size:13px;
+color:var(--muted);
+}
+
+.arrow{
+width:22px;
+height:22px;
+border-radius:999px;
+border:1px solid var(--border);
+display:grid;
+place-items:center;
+}
+
+.arrow::before{
+content:"";
+width:7px;
+height:7px;
+border-right:2px solid var(--cream);
+border-top:2px solid var(--cream);
+transform:rotate(45deg);
+}
+
+/* footer */
+
+footer{
+margin-top:26px;
+padding-top:18px;
+border-top:1px solid rgba(255,255,255,.10);
+display:flex;
+justify-content:space-between;
+font-size:12px;
+color:var(--muted);
+}
+
+/* responsive */
+
+@media (max-width:980px){
+
+.hubGrid{
+grid-template-columns:1fr;
+}
+
+.hubCard{
+min-height:190px;
+}
+
+main{
+padding-top:calc(var(--headerH) + 34px);
+}
+
+}
+
+</style>
 </head>
 
 <body>
-  <header>
-    <div class="brand">
-      <img src="images/subtletang-logo.png" alt="subtletang logo" class="logo" />
-      <div class="brandName">subtletang</div>
-    </div>
 
-    <div class="menuWrap">
-      <button id="menuBtn" class="menuBtn" aria-expanded="false">
-        Menu <span class="chev"></span>
-      </button>
-      <nav id="menu" class="menu" aria-label="Site">
-        <a href="index.html">Home <small>hub</small></a>
-        <a href="releases.html">Releases <small>mp3 / zip</small></a>
-        <a href="links.html">Links <small>platforms</small></a>
-        <a href="store.html">Store <small>merch</small></a>
-        <a href="about.html">About <small>statement</small></a>
-        <a href="contact.html">Contact <small>email</small></a>
-      </nav>
-    </div>
-  </header>
+<header>
 
-  <main>
-    <div style="display:flex; justify-content:center;">
-      <div class="pill">
-        <span>Navigate</span>
-        <span class="pillDot"></span>
-        <span>Hub</span>
-      </div>
-    </div>
+<div class="brand">
+<img src="images/subtletang-logo.png" class="logo">
+<div class="brandName">subtletang</div>
+</div>
 
-    <div class="hubGrid">
-      <a class="hubCard" href="releases.html" aria-label="Open Releases">
-        <div>
-          <div class="cardTop">
-            <div class="kicker">Releases</div>
-            <div class="meta">free downloads</div>
-          </div>
-          <div class="cardBody">Releases, MP3 Files, Archive, and More.</div>
-        </div>
-        <div class="cardFooter">
-          <span>Open</span>
-          <span class="arrow" aria-hidden="true"></span>
-        </div>
-      </a>
+<div class="menuWrap">
 
-      <a class="hubCard" href="links.html" aria-label="Open Links">
-        <div>
-          <div class="cardTop">
-            <div class="kicker">Links</div>
-            <div class="meta">platforms</div>
-          </div>
-          <div class="cardBody">Come Find Me Here.</div>
-        </div>
-        <div class="cardFooter">
-          <span>Open</span>
-          <span class="arrow" aria-hidden="true"></span>
-        </div>
-      </a>
+<button id="menuBtn" class="menuBtn">
+Menu <span class="chev"></span>
+</button>
 
-      <a class="hubCard" href="store.html" aria-label="Open Store">
-        <div>
-          <div class="cardTop">
-            <div class="kicker">Store</div>
-            <div class="meta">merch</div>
-          </div>
-          <div class="cardBody">Coming Soon...</div>
-        </div>
-        <div class="cardFooter">
-          <span>Open</span>
-          <span class="arrow" aria-hidden="true"></span>
-        </div>
-      </a>
-    </div>
+<nav id="menu" class="menu">
 
-    <footer>
-      <div>subtletang</div>
-      <div>Independent Project</div>
-    </footer>
-  </main>
+<a href="index.html">Home <small>hub</small></a>
+<a href="releases.html">Releases <small>mp3 / zip</small></a>
+<a href="links.html">Links <small>platforms</small></a>
+<a href="store.html">Store <small>merch</small></a>
+<a href="about.html">About <small>statement</small></a>
+<a href="contact.html">Contact <small>email</small></a>
 
-  <script>
-    const btn = document.getElementById('menuBtn');
-    const menu = document.getElementById('menu');
+</nav>
+</div>
+</header>
 
-    function closeMenu(){
-      menu.classList.remove('open');
-      btn.setAttribute('aria-expanded', 'false');
-    }
-    function openMenu(){
-      menu.classList.add('open');
-      btn.setAttribute('aria-expanded', 'true');
-    }
+<main>
 
-    btn.addEventListener('click', (e) => {
-      e.stopPropagation();
-      menu.classList.contains('open') ? closeMenu() : openMenu();
-    });
+<div class="pillWrap">
+<div class="pill">
+<span>Navigate</span>
+<span class="pillDot"></span>
+<span>Hub</span>
+</div>
+</div>
 
-    document.addEventListener('click', () => closeMenu());
-    menu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => closeMenu()));
-  </script>
+<div class="hubGrid">
+
+<a class="hubCard" href="releases.html">
+
+<div>
+<div class="cardTop">
+<div class="kicker">Releases</div>
+<div class="meta">free downloads</div>
+</div>
+
+<div class="cardBody">
+Releases, MP3 files, archive, and more.
+</div>
+</div>
+
+<div class="cardFooter">
+<span>Open</span>
+<span class="arrow"></span>
+</div>
+
+</a>
+
+<a class="hubCard" href="links.html">
+
+<div>
+<div class="cardTop">
+<div class="kicker">Links</div>
+<div class="meta">platforms</div>
+</div>
+
+<div class="cardBody">
+Come find me here.
+</div>
+</div>
+
+<div class="cardFooter">
+<span>Open</span>
+<span class="arrow"></span>
+</div>
+
+</a>
+
+<a class="hubCard" href="store.html">
+
+<div>
+<div class="cardTop">
+<div class="kicker">Store</div>
+<div class="meta">merch</div>
+</div>
+
+<div class="cardBody">
+Coming soon...
+</div>
+</div>
+
+<div class="cardFooter">
+<span>Open</span>
+<span class="arrow"></span>
+</div>
+
+</a>
+
+</div>
+
+<footer>
+<div>subtletang</div>
+<div>Independent Project</div>
+</footer>
+
+</main>
+
+<script>
+
+const btn=document.getElementById("menuBtn");
+const menu=document.getElementById("menu");
+
+function closeMenu(){
+menu.classList.remove("open");
+}
+
+function openMenu(){
+menu.classList.add("open");
+}
+
+btn.addEventListener("click",(e)=>{
+e.stopPropagation();
+menu.classList.contains("open") ? closeMenu() : openMenu();
+});
+
+document.addEventListener("click",closeMenu);
+
+menu.querySelectorAll("a").forEach(a=>{
+a.addEventListener("click",closeMenu);
+});
+
+</script>
+
 </body>
 </html>
