@@ -16,13 +16,13 @@
 :root{
 --navy:#0f1a3a;
 --logoBlue:#1b2f7a;
---cream:#f4ecd8;
+--logoBg:#d8d8dd;
 
---text:var(--cream);
---muted:rgba(244,236,216,.65);
+--text:var(--logoBg);
+--muted:rgba(216,216,221,.65);
 
---border:rgba(255,255,255,.14);
---border2:rgba(255,255,255,.18);
+--border:rgba(216,216,221,.18);
+--border2:rgba(216,216,221,.25);
 
 --shadow:0 20px 70px rgba(0,0,0,.5);
 
@@ -44,7 +44,7 @@ body{
 margin:0;
 font-family:"JetBrains Mono", monospace;
 background:var(--navy);
-color:var(--cream);
+color:var(--text);
 overflow-x:hidden;
 }
 
@@ -60,8 +60,8 @@ display:flex;
 align-items:center;
 justify-content:space-between;
 padding:0 18px;
-background:var(--navy);
-border-bottom:1px solid rgba(255,255,255,.08);
+background:var(--logoBg);
+border-bottom:1px solid rgba(0,0,0,.08);
 z-index:1000;
 }
 
@@ -77,8 +77,6 @@ width:40px;
 height:40px;
 border-radius:50%;
 object-fit:cover;
-background:#ffffff;
-padding:3px;
 border:2px solid var(--logoBlue);
 }
 
@@ -86,6 +84,7 @@ border:2px solid var(--logoBlue);
 font-style:italic;
 font-weight:600;
 letter-spacing:.2px;
+color:var(--logoBlue);
 }
 
 /* menu */
@@ -100,9 +99,9 @@ align-items:center;
 gap:10px;
 padding:10px 14px;
 border-radius:999px;
-border:1px solid var(--border);
-background:rgba(255,255,255,.06);
-color:var(--cream);
+border:1px solid var(--logoBlue);
+background:transparent;
+color:var(--logoBlue);
 cursor:pointer;
 font:inherit;
 }
@@ -110,8 +109,8 @@ font:inherit;
 .chev{
 width:10px;
 height:10px;
-border-right:2px solid var(--cream);
-border-bottom:2px solid var(--cream);
+border-right:2px solid var(--logoBlue);
+border-bottom:2px solid var(--logoBlue);
 transform:rotate(45deg);
 margin-top:-2px;
 }
@@ -139,7 +138,7 @@ align-items:center;
 justify-content:space-between;
 padding:12px;
 border-radius:14px;
-color:var(--cream);
+color:var(--logoBg);
 text-decoration:none;
 border:1px solid transparent;
 }
@@ -185,7 +184,11 @@ font-size:12px;
 
 .panel{
 border-radius:var(--radius);
-background:rgba(27,47,122,.08);
+background:linear-gradient(
+160deg,
+rgba(15,26,58,.95) 0%,
+rgba(27,47,122,.65) 100%
+);
 border:1px solid var(--border2);
 box-shadow:var(--shadow);
 padding:18px;
@@ -196,8 +199,8 @@ padding:16px;
 border-radius:18px;
 background:rgba(255,255,255,.04);
 border:1px solid rgba(255,255,255,.12);
-color:rgba(244,236,216,.85);
-line-height:1.6;
+color:var(--logoBg);
+line-height:1.65;
 }
 
 /* footer */
@@ -205,7 +208,7 @@ line-height:1.6;
 footer{
 margin-top:26px;
 padding-top:18px;
-border-top:1px solid rgba(255,255,255,.10);
+border-top:1px solid var(--border);
 display:flex;
 justify-content:space-between;
 font-size:12px;
@@ -257,7 +260,11 @@ Menu <span class="chev"></span>
 
 subtletang is a small independent music project and archive.
 
-the music here may eventually end up on streaming platforms, but this page is the original home for everything.
+most of the tracks here start as experiments. late night ideas, unfinished sketches, or sounds that end up growing into something bigger. over time those pieces started forming their own space, and subtletang became that place.
+
+this site is meant to stay simple. no algorithms, no feeds, no layers between the music and the listener. just releases, downloads, and whatever ends up being made next.
+
+some of the music here may eventually make its way to streaming platforms, but this page is the original home for everything.
 
 </div>
 
