@@ -16,13 +16,13 @@
 :root{
 --navy:#0f1a3a;
 --logoBlue:#1b2f7a;
---cream:#f4ecd8;
+--logoBg:#d8d8dd;
 
---text:var(--cream);
---muted:rgba(244,236,216,.65);
+--text:var(--logoBg);
+--muted:rgba(216,216,221,.72);
 
---border:rgba(255,255,255,.14);
---border2:rgba(255,255,255,.18);
+--border:rgba(216,216,221,.18);
+--border2:rgba(216,216,221,.22);
 
 --shadow:0 20px 70px rgba(0,0,0,.5);
 
@@ -44,7 +44,7 @@ body{
 margin:0;
 font-family:"JetBrains Mono", monospace;
 background:var(--navy);
-color:var(--cream);
+color:var(--text);
 overflow-x:hidden;
 }
 
@@ -61,7 +61,7 @@ align-items:center;
 justify-content:space-between;
 padding:0 18px;
 background:var(--navy);
-border-bottom:1px solid rgba(255,255,255,.08);
+border-bottom:1px solid var(--logoBg);
 z-index:1000;
 }
 
@@ -86,6 +86,7 @@ border:2px solid var(--logoBlue);
 font-style:italic;
 font-weight:600;
 letter-spacing:.2px;
+color:var(--logoBlue);
 }
 
 /* menu */
@@ -100,9 +101,9 @@ align-items:center;
 gap:10px;
 padding:10px 14px;
 border-radius:999px;
-border:1px solid var(--border);
+border:1px solid var(--logoBg);
 background:rgba(255,255,255,.06);
-color:var(--cream);
+color:var(--logoBlue);
 cursor:pointer;
 font:inherit;
 }
@@ -110,8 +111,8 @@ font:inherit;
 .chev{
 width:10px;
 height:10px;
-border-right:2px solid var(--cream);
-border-bottom:2px solid var(--cream);
+border-right:2px solid var(--logoBlue);
+border-bottom:2px solid var(--logoBlue);
 transform:rotate(45deg);
 margin-top:-2px;
 }
@@ -124,7 +125,7 @@ min-width:220px;
 padding:10px;
 border-radius:18px;
 background:var(--navy);
-border:1px solid var(--border);
+border:1px solid var(--logoBg);
 box-shadow:0 22px 70px rgba(0,0,0,.55);
 display:none;
 }
@@ -139,7 +140,7 @@ align-items:center;
 justify-content:space-between;
 padding:12px;
 border-radius:14px;
-color:var(--cream);
+color:var(--logoBg);
 text-decoration:none;
 border:1px solid transparent;
 }
@@ -174,9 +175,10 @@ align-items:center;
 gap:12px;
 padding:10px 16px;
 border-radius:999px;
-border:1px solid var(--border);
+border:1px solid var(--logoBg);
 background:rgba(255,255,255,.05);
 margin-bottom:26px;
+color:var(--logoBg);
 }
 
 .pillDot{
@@ -199,7 +201,7 @@ display:flex;
 flex-direction:column;
 justify-content:space-between;
 text-decoration:none;
-color:var(--cream);
+color:var(--logoBg);
 border-radius:var(--radius);
 padding:22px;
 border:1px solid var(--border2);
@@ -224,6 +226,7 @@ font-size:12px;
 letter-spacing:2px;
 text-transform:uppercase;
 font-weight:700;
+color:var(--logoBg);
 }
 
 .meta{
@@ -237,7 +240,7 @@ margin-top:12px;
 line-height:1.4;
 font-size:14px;
 max-width:48ch;
-color:rgba(244,236,216,.85);
+color:var(--logoBg);
 }
 
 .cardFooter{
@@ -253,7 +256,7 @@ color:var(--muted);
 width:22px;
 height:22px;
 border-radius:999px;
-border:1px solid var(--border);
+border:1px solid var(--logoBg);
 display:grid;
 place-items:center;
 }
@@ -262,8 +265,8 @@ place-items:center;
 content:"";
 width:7px;
 height:7px;
-border-right:2px solid var(--cream);
-border-top:2px solid var(--cream);
+border-right:2px solid var(--logoBg);
+border-top:2px solid var(--logoBg);
 transform:rotate(45deg);
 }
 
@@ -272,7 +275,7 @@ transform:rotate(45deg);
 footer{
 margin-top:26px;
 padding-top:18px;
-border-top:1px solid rgba(255,255,255,.10);
+border-top:1px solid var(--logoBg);
 display:flex;
 justify-content:space-between;
 font-size:12px;
@@ -305,7 +308,7 @@ padding-top:calc(var(--headerH) + 34px);
 <header>
 
 <div class="brand">
-<img src="IMG_8238.jpeg" class="logo">
+<img src="IMG_8238.jpeg" class="logo" alt="subtletang logo">
 <div class="brandName">subtletang</div>
 </div>
 
