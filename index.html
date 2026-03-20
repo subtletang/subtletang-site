@@ -32,13 +32,8 @@
 --headerH:74px;
 }
 
-*{
-box-sizing:border-box;
-}
-
-html,body{
-height:100%;
-}
+*{box-sizing:border-box;}
+html,body{height:100%;}
 
 body{
 margin:0;
@@ -89,9 +84,7 @@ color:var(--logoBlue);
 
 /* menu */
 
-.menuWrap{
-position:relative;
-}
+.menuWrap{position:relative;}
 
 .menuBtn{
 display:inline-flex;
@@ -107,8 +100,7 @@ font:inherit;
 }
 
 .chev{
-width:10px;
-height:10px;
+width:10px;height:10px;
 border-right:2px solid var(--logoBlue);
 border-bottom:2px solid var(--logoBlue);
 transform:rotate(45deg);
@@ -128,29 +120,22 @@ box-shadow:0 22px 70px rgba(0,0,0,.55);
 display:none;
 }
 
-.menu.open{
-display:block;
-}
+.menu.open{display:block;}
 
 .menu a{
 display:flex;
-align-items:center;
 justify-content:space-between;
 padding:12px;
 border-radius:14px;
 color:var(--logoBg);
 text-decoration:none;
-border:1px solid transparent;
 }
 
 .menu a:hover{
 background:rgba(27,47,122,.15);
-border-color:rgba(27,47,122,.45);
 }
 
-.menu small{
-color:var(--muted);
-}
+.menu small{color:var(--muted);}
 
 /* main */
 
@@ -162,10 +147,7 @@ padding:calc(var(--headerH) + 46px) var(--pad) 42px;
 
 /* pill */
 
-.pillWrap{
-display:flex;
-justify-content:center;
-}
+.pillWrap{display:flex;justify-content:center;}
 
 .pill{
 display:inline-flex;
@@ -176,137 +158,62 @@ border-radius:999px;
 border:1px solid var(--border);
 background:rgba(255,255,255,.05);
 margin-bottom:26px;
-color:var(--logoBg);
 }
 
 .pillDot{
-width:6px;
-height:6px;
-border-radius:99px;
-background:var(--logoBlue);
+width:6px;height:6px;border-radius:99px;background:var(--logoBlue);
 }
 
 /* featured */
 
 .featured{
-position:relative;
-overflow:hidden;
 margin-bottom:28px;
 border-radius:var(--radius);
 padding:24px;
 border:1px solid var(--border2);
-background:
-radial-gradient(circle at top right, rgba(216,216,221,.09), transparent 28%),
-linear-gradient(
-160deg,
-rgba(15,26,58,.98) 0%,
-rgba(27,47,122,.78) 100%
-);
+background:linear-gradient(160deg,#0f1a3a,#1b2f7a);
 box-shadow:var(--shadow);
 animation:fadeIn .6s ease;
 }
 
-.featured::after{
-content:"";
-position:absolute;
-right:-80px;
-top:-80px;
-width:220px;
-height:220px;
-background:radial-gradient(circle, rgba(216,216,221,.08), transparent 65%);
-pointer-events:none;
-}
-
 .featuredInner{
-position:relative;
 display:flex;
-align-items:center;
 justify-content:space-between;
+align-items:center;
 gap:24px;
 }
 
-.featuredText{
-max-width:620px;
-}
-
-.featuredLabel{
-font-size:11px;
-letter-spacing:2px;
-text-transform:uppercase;
-font-weight:700;
-color:var(--muted);
-}
-
 .featuredTitle{
+font-size:32px;
 margin-top:8px;
-font-size:34px;
-line-height:1.05;
-letter-spacing:1px;
-text-transform:uppercase;
-color:var(--logoBg);
 }
 
 .featuredSub{
-margin-top:10px;
-font-size:14px;
-line-height:1.5;
+margin-top:8px;
 color:var(--muted);
-max-width:56ch;
-}
-
-.featuredActions{
-display:flex;
-flex-wrap:wrap;
-gap:12px;
-margin-top:18px;
 }
 
 .featuredBtn{
-display:inline-flex;
-align-items:center;
-justify-content:center;
-padding:11px 16px;
+margin-top:16px;
+display:inline-block;
+padding:10px 16px;
 border-radius:999px;
 border:1px solid var(--border);
-background:rgba(255,255,255,.06);
-color:var(--logoBg);
 text-decoration:none;
+color:white;
 font-size:12px;
-transition:.18s ease;
 }
 
 .featuredBtn:hover{
-transform:translateY(-1px);
-background:rgba(27,47,122,.24);
-border-color:rgba(216,216,221,.35);
-}
-
-.featuredBtn.primary:hover{
-background:rgba(29,185,84,.18);
-border-color:rgba(29,185,84,.45);
-}
-
-.featuredArt{
-flex:0 0 180px;
-display:flex;
-justify-content:center;
+background:rgba(29,185,84,.2);
 }
 
 .featuredArt img{
 width:180px;
 height:180px;
-border-radius:22px;
+border-radius:20px;
 object-fit:cover;
-border:1px solid var(--border2);
-box-shadow:0 18px 50px rgba(0,0,0,.45),
-            0 0 40px rgba(255,120,60,.15);
-transition:.25s ease;
-}
-
-.featuredArt img:hover{
-transform:scale(1.03);
-box-shadow:0 25px 70px rgba(0,0,0,.6),
-            0 0 60px rgba(255,120,60,.25);
+box-shadow:0 20px 60px rgba(0,0,0,.5);
 }
 
 /* cards */
@@ -322,81 +229,20 @@ display:flex;
 flex-direction:column;
 justify-content:space-between;
 text-decoration:none;
-color:var(--logoBg);
+color:white;
 border-radius:var(--radius);
 padding:22px;
 border:1px solid var(--border2);
-background:linear-gradient(
-160deg,
-rgba(15,26,58,.95) 0%,
-rgba(27,47,122,.65) 100%
-);
+background:linear-gradient(160deg,#0f1a3a,#1b2f7a);
 box-shadow:var(--shadow);
-min-height:210px;
-transition:.2s ease;
 }
 
-.hubCard:hover{
-transform:translateY(-3px);
-background:linear-gradient(
-160deg,
-rgba(27,47,122,.9) 0%,
-rgba(15,26,58,1) 100%
-);
-}
-
-.cardTop{
-display:flex;
-justify-content:space-between;
-}
-
-.kicker{
-font-size:12px;
-letter-spacing:2px;
-text-transform:uppercase;
-font-weight:700;
-color:var(--logoBg);
-}
-
-.meta{
-font-size:12px;
-color:var(--muted);
-text-transform:lowercase;
-}
-
-.cardBody{
-margin-top:12px;
-line-height:1.4;
-font-size:14px;
-max-width:48ch;
-color:var(--logoBg);
-}
+.hubCard:hover{transform:translateY(-3px);}
 
 .cardFooter{
 display:flex;
 justify-content:space-between;
-align-items:center;
 margin-top:18px;
-font-size:13px;
-color:var(--muted);
-}
-
-.arrow{
-width:22px;
-height:22px;
-border-radius:999px;
-border:1px solid var(--border);
-display:grid;
-place-items:center;
-}
-
-.arrow::before{
-content:"";
-width:7px;
-height:7px;
-border-right:2px solid var(--logoBg);
-border-top:2px solid var(--logoBg);
-transform:rotate(45deg);
 }
 
 /* footer */
@@ -411,58 +257,11 @@ font-size:12px;
 color:var(--muted);
 }
 
-/* motion */
+/* animation */
 
 @keyframes fadeIn{
-from{
-opacity:0;
-transform:translateY(10px);
-}
-to{
-opacity:1;
-transform:translateY(0);
-}
-}
-
-/* responsive */
-
-@media (max-width:980px){
-
-.hubGrid{
-grid-template-columns:1fr;
-}
-
-.hubCard{
-min-height:190px;
-}
-
-main{
-padding-top:calc(var(--headerH) + 34px);
-}
-
-.featuredInner{
-flex-direction:column-reverse;
-align-items:flex-start;
-}
-
-.featuredArt{
-flex:0 0 auto;
-}
-
-.featuredTitle{
-font-size:26px;
-}
-
-.featuredArt img{
-width:150px;
-height:150px;
-}
-
-footer{
-flex-direction:column;
-gap:8px;
-}
-
+from{opacity:0;transform:translateY(10px);}
+to{opacity:1;transform:translateY(0);}
 }
 
 </style>
@@ -471,15 +270,13 @@ gap:8px;
 <body>
 
 <header>
-
 <div class="brand">
-<img src="IMG_8238.jpeg" class="logo" alt="subtletang logo">
+<img src="IMG_8238.jpeg" class="logo">
 <div class="brandName">subtletang</div>
 </div>
 
 <div class="menuWrap">
-
-<button id="menuBtn" class="menuBtn" aria-expanded="false">
+<button id="menuBtn" class="menuBtn">
 Menu <span class="chev"></span>
 </button>
 
@@ -491,7 +288,6 @@ Menu <span class="chev"></span>
 <a href="about.html">About <small>statement</small></a>
 <a href="contact.html">Contact <small>email</small></a>
 </nav>
-
 </div>
 </header>
 
@@ -506,89 +302,40 @@ Menu <span class="chev"></span>
 </div>
 
 <div class="featured">
-  <div class="featuredInner">
+<div class="featuredInner">
 
-    <div class="featuredText">
-      <div class="featuredLabel">Featured release</div>
-      <div class="featuredTitle">The Secret Recipe</div>
-      <div class="featuredSub">
-        New release from subtletang. Stream it on Spotify, move through the archive, or jump straight into the releases page.
-      </div>
+<div>
+<div class="featuredLabel">Now playing</div>
+<div class="featuredTitle">The Secret Recipe</div>
+<div class="featuredSub">subtletang</div>
 
-      <div class="featuredActions">
-        <a class="featuredBtn primary" href="https://open.spotify.com/artist/6UAaqTK5uza7Bwg4lhlX6K?si=uGmdeqpSRpGUATm2ar60tA" target="_blank" rel="noopener">Listen on Spotify</a>
-        <a class="featuredBtn" href="releases.html">Open releases</a>
-        <a class="featuredBtn" href="links.html">All links</a>
-      </div>
-    </div>
+<a class="featuredBtn" href="https://open.spotify.com/artist/6UAaqTK5uza7Bwg4lhlX6K?si=uGmdeqpSRpGUATm2ar60tA" target="_blank">
+Listen on Spotify
+</a>
+</div>
 
-    <div class="featuredArt">
-      <img src="secret-recipe.jpg" alt="The Secret Recipe artwork">
-    </div>
+<div class="featuredArt">
+<img src="secret-recipe.jpg">
+</div>
 
-  </div>
+</div>
 </div>
 
 <div class="hubGrid">
 
 <a class="hubCard" href="releases.html">
-
-<div>
-<div class="cardTop">
-<div class="kicker">Releases</div>
-<div class="meta">free downloads</div>
-</div>
-
-<div class="cardBody">
-Releases, MP3 files, archive, and more.
-</div>
-</div>
-
-<div class="cardFooter">
-<span>Open</span>
-<span class="arrow"></span>
-</div>
-
+<div>Releases</div>
+<div class="cardFooter"><span>Open</span></div>
 </a>
 
 <a class="hubCard" href="links.html">
-
-<div>
-<div class="cardTop">
-<div class="kicker">Links</div>
-<div class="meta">platforms</div>
-</div>
-
-<div class="cardBody">
-Come find me here.
-</div>
-</div>
-
-<div class="cardFooter">
-<span>Open</span>
-<span class="arrow"></span>
-</div>
-
+<div>Links</div>
+<div class="cardFooter"><span>Open</span></div>
 </a>
 
 <a class="hubCard" href="store.html">
-
-<div>
-<div class="cardTop">
-<div class="kicker">Store</div>
-<div class="meta">merch</div>
-</div>
-
-<div class="cardBody">
-Coming soon...
-</div>
-</div>
-
-<div class="cardFooter">
-<span>Open</span>
-<span class="arrow"></span>
-</div>
-
+<div>Store</div>
+<div class="cardFooter"><span>Open</span></div>
 </a>
 
 </div>
@@ -601,31 +348,11 @@ Coming soon...
 </main>
 
 <script>
-
 const btn=document.getElementById("menuBtn");
 const menu=document.getElementById("menu");
 
-function closeMenu(){
-menu.classList.remove("open");
-btn.setAttribute("aria-expanded","false");
-}
-
-function openMenu(){
-menu.classList.add("open");
-btn.setAttribute("aria-expanded","true");
-}
-
-btn.addEventListener("click",(e)=>{
-e.stopPropagation();
-menu.classList.contains("open") ? closeMenu() : openMenu();
-});
-
-document.addEventListener("click",closeMenu);
-
-menu.querySelectorAll("a").forEach(a=>{
-a.addEventListener("click",closeMenu);
-});
-
+btn.onclick=()=>menu.classList.toggle("open");
+document.onclick=()=>menu.classList.remove("open");
 </script>
 
 </body>
